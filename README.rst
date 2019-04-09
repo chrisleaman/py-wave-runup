@@ -13,6 +13,8 @@ Python Wave Runup
     :target: https://py-wave-runup.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+.. image:: https://codecov.io/gh/chrisleaman/py-wave-runup/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/chrisleaman/py-wave-runup
 
 .. image:: https://pyup.io/repos/github/chrisleaman/py-wave-runup/shield.svg
      :target: https://pyup.io/repos/github/chrisleaman/py-wave-runup/
