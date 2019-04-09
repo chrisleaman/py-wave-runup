@@ -18,7 +18,8 @@ Python Wave Runup
      :target: https://pyup.io/repos/github/chrisleaman/py-wave-runup/
      :alt: Updates
 
-
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/ambv/black
 
 Empirical wave runup models implemented in Python
 
