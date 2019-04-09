@@ -15,11 +15,6 @@ stages:
   - name: deploy
     if: tag IS present
 
-cache:
-  pip: true
-  directories:
-    - "$HOME/.cache/pre-commit"
-
 jobs:
   include:
     - stage: lint
