@@ -15,6 +15,15 @@ stages:
   - name: deploy
     if: tag IS present
 
+before_install:
+  - pip install --upgrade pip
+  - pip install poetry
+install:
+  - poetry install -v
+  - pip install tox-travis
+script:
+  - tox
+
 jobs:
   include:
     - stage: lint
@@ -24,15 +33,6 @@ jobs:
         - pre-commit install-hooks
       script:
         - pre-commit run --all-files
-    - stage: test
-      before_install:
-        - pip install --upgrade pip
-        - pip install poetry
-      install:
-        - poetry install -v
-        - pip install tox-travis
-      script:
-        - tox
     - stage: deploy
       python: 3.6
       script:
