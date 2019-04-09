@@ -9,42 +9,48 @@ python:
   - 3.4
   - 2.7
 
-# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-before_install:
-- pip install poetry
+stages:
+  - lint
+  - test
+  - name: deploy
+    if: tag IS present
 
-install:
-- poetry install -v
-- pip install tox-travis
+cache:
+  pip: true
+  directories:
+    - "$HOME/.cache/pre-commit"
 
-# Command to run tests, e.g. python setup.py test
-script: tox
-
-# # Assuming you have installed the travis-ci CLI tool, after you
-# # create the Github repo and add it to Travis, run the
-# # following command to finish PyPI deployment setup:
-# # $ travis encrypt --add deploy.password
-# deploy:
-#   provider: pypi
-#   distributions: sdist bdist_wheel
-#   user: chrisleaman
-#   password:
-#     secure: PLEASE_REPLACE_ME
-#   on:
-#     tags: true
-#     repo: chrisleaman/py_wave_runup
-#     python: 3.6
-
-# before_deploy:
-# - poetry config http-basic.pypi $PYPI_USER $PYPI_PASSWORD
-# - poetry build
-# deploy:
-#   provider: script
-#   script: poetry publish
-#   on:
-#     tags: true
-#     condition: "$TRAVIS_PYTHON_VERSION == 3.7"
-# env:
-#   global:
-#   - secure: [REDACTED]
-#   - secure: [REDACTED]
+jobs:
+  include:
+    - stage: lint
+      install:
+        - pip install pre-commit
+        - pre-commit install-hooks
+      script:
+        - pre-commit run --all-files
+    - stage: test
+      before_install:
+        - pip install --upgrade pip
+        - pip install poetry
+      install:
+        - poetry install -v
+        - pip install tox-travis
+      script:
+        - tox
+    - stage: deploy
+      script:
+        - echo Deploying to PyPI...
+      before_deploy:
+        # User and password environment variables are set as hidden variables through
+        # the web interface in the project settings.
+        - pip install --upgrade pip
+        - pip install poetry
+        - poetry config http-basic.pypi $PYPI_USER $PYPI_PASS
+        - poetry build
+      deploy:
+        provider: script
+        script: poetry publish
+        skip_cleanup: true
+        on:
+          branch: master
+          tags: true
