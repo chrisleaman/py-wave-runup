@@ -18,6 +18,7 @@ stages:
 jobs:
   include:
     - stage: lint
+      python: 3.6
       install:
         - pip install pre-commit
         - pre-commit install-hooks
@@ -33,6 +34,7 @@ jobs:
       script:
         - tox
     - stage: deploy
+      python: 3.6
       script:
         - echo Deploying to PyPI...
       before_deploy:
