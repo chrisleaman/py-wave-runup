@@ -3,8 +3,8 @@ Python Wave Runup
 =================
 
 
-.. image:: https://img.shields.io/pypi/v/py_wave_runup.svg
-        :target: https://pypi.python.org/pypi/py_wave_runup
+.. image:: https://img.shields.io/pypi/v/py-wave-runup.svg
+        :target: https://pypi.python.org/pypi/py-wave-runup
 
 .. image:: https://img.shields.io/travis/com/chrisleaman/py-wave-runup.svg
         :target: https://travis-ci.com/chrisleaman/py-wave-runup
