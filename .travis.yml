@@ -3,11 +3,10 @@
 language: python
 dist: "xenial"
 python:
-  - 3.6
   - 3.7
+  - 3.6
   - 3.5
   - 3.4
-  - 2.7
 
 stages:
   - lint
@@ -17,9 +16,8 @@ stages:
 
 before_install:
   - pip install --upgrade pip
-  - pip install poetry
 install:
-  - poetry install -v
+  - pip install poetry
   - pip install tox-travis
 script:
   - tox
@@ -34,7 +32,6 @@ jobs:
       script:
         - pre-commit run --all-files
     - stage: deploy
-      python: 3.6
       script:
         - echo Deploying to PyPI...
       before_deploy:
