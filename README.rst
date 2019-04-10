@@ -1,6 +1,9 @@
 =================
 Python Wave Runup
 =================
+::
+
+    Empirical wave runup models implemented in Python for coastal engineers and scientists.
 
 
 .. image:: https://img.shields.io/pypi/v/py-wave-runup.svg
@@ -23,9 +26,6 @@ Python Wave Runup
      :target: https://pyup.io/repos/github/chrisleaman/py-wave-runup/
      :alt: Updates
 
-::
-
-    Empirical wave runup models implemented in Python for coastal engineers and scientists.
 
 
 Background
