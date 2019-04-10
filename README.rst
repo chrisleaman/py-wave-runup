@@ -41,9 +41,9 @@ of the water "runup" and rundown the beach. It is comprised of two components:
 Setup, swash and other components of Total Water Level (TWL) rise are shown in this
 handy figure below.
 
-.. figure:: ./docs/_static/VitousekDoubling2017Fig1.jpg
+.. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
 
-    Figure from Vitousek et al. (2017) [#vit17]_
+|   Figure from Vitousek et al. (2017) [#vit17]_
 
 Wave runup can contribute a significant portion of the increase in TWL in coastal
 storms causing erosion and inundation. For example, Stockdon et al. (2006) [#sto06]_
