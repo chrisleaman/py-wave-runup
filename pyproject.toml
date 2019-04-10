@@ -21,6 +21,7 @@ pytest = "^4.4"
 pre-commit = "^1.15"
 codecov = "^2.0"
 pytest-cov = "^2.6"
+sphinx = "^2.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
