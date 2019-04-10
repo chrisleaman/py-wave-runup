@@ -42,6 +42,7 @@ Setup, swash and other components of Total Water Level (TWL) rise are shown in t
 handy figure below.
 
 .. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
+..
 
     | Figure from Vitousek et al. (2017) [#vit17]_
 
