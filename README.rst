@@ -66,17 +66,6 @@ wave runup models include:
 This python package attempts to consolidate the work done by others in this field and
 collate the numerous empirical relationships for wave runup which have been published.
 
-.. [#vit17] Vitousek, Sean, Patrick L. Barnard, Charles H. Fletcher, Neil Frazer,
-       Li Erikson, and Curt D. Storlazzi. "Doubling of Coastal Flooding Frequency
-       within Decades Due to Sea-Level Rise." Scientific Reports 7, no. 1 (May 18,
-       2017): 1399. https://doi.org/10.1038/s41598-017-01362-7.
-.. [#sto06] Stockdon, Hilary F., Robert A. Holman, Peter A. Howd, and Asbury H. Sallenger.
-       "Empirical Parameterization of Setup, Swash, and Runup." Coastal Engineering 53,
-       no. 7 (May 1, 2006): 573-88. https://doi.org/10.1016/j.coastaleng.2005.12.005
-.. [#cem06] United States, Army, and Corps of Engineers. Coastal Engineering Manual.
-       Washington, D.C.: U.S. Army Corps of Engineers, 2006.
-
-
 Installation
 ------------
 
@@ -106,6 +95,7 @@ Documentation
 -------------
 Documentation is located at  https://py-wave-runup.readthedocs.io.
 
+
 Contributing
 ------------
 
@@ -120,3 +110,17 @@ License
 --------
 
 Distributed under the GNU General Public License v3.
+
+
+References
+----------
+
+.. [#vit17] Vitousek, Sean, Patrick L. Barnard, Charles H. Fletcher, Neil Frazer,
+       Li Erikson, and Curt D. Storlazzi. "Doubling of Coastal Flooding Frequency
+       within Decades Due to Sea-Level Rise." Scientific Reports 7, no. 1 (May 18,
+       2017): 1399. https://doi.org/10.1038/s41598-017-01362-7.
+.. [#sto06] Stockdon, Hilary F., Robert A. Holman, Peter A. Howd, and Asbury H. Sallenger.
+       "Empirical Parameterization of Setup, Swash, and Runup." Coastal Engineering 53,
+       no. 7 (May 1, 2006): 573-88. https://doi.org/10.1016/j.coastaleng.2005.12.005
+.. [#cem06] United States, Army, and Corps of Engineers. Coastal Engineering Manual.
+       Washington, D.C.: U.S. Army Corps of Engineers, 2006.
