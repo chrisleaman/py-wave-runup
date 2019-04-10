@@ -43,10 +43,10 @@ handy figure below.
 
 .. figure:: ./docs/_static/VitousekDoubling2017Fig1.jpg
 
-    Figure from Vitousek et al. (2017)[#vit17]_
+    Figure from Vitousek et al. (2017) [#vit17]_
 
 Wave runup can contribute a significant portion of the increase in TWL in coastal
-storms causing erosion and inundation. For example, Stockdon et al. (2006)[#sto06]_
+storms causing erosion and inundation. For example, Stockdon et al. (2006) [#sto06]_
 collated data from numerous experiments, some of which showed wave runup 2% excedence
 heights in excess of 3 m during some storms.
 
@@ -54,9 +54,9 @@ Given the impact such a large increase in TWL can have on coastlines, there has 
 much research conducted to try improve our understanding of wave runup processes.
 Although there are many processes which can influence wave runup (such as nonlinear
 wave transformation, wave reflection, three-dimensional effects, porosity, roughness,
-permeability and groundwater)[#cem06]_, many attempts have been made to derive empirical
-relatinoships based on easily measurable parameters. Typically, empirical wave runup
-models include:
+permeability and groundwater) [#cem06]_, many attempts have been made to derive
+empirical relatinoships based on easily measurable parameters. Typically, empirical
+wave runup models include:
 
     - **Hs**: significant wave height
     - **Tp**: peak wave length
