@@ -43,7 +43,7 @@ handy figure below.
 
 .. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
 
-|   Figure from Vitousek et al. (2017) [#vit17]_
+    | Figure from Vitousek et al. (2017) [#vit17]_
 
 Wave runup can contribute a significant portion of the increase in TWL in coastal
 storms causing erosion and inundation. For example, Stockdon et al. (2006) [#sto06]_
