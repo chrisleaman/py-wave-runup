@@ -13,6 +13,15 @@ class RunupModel(object):
     doi = None
 
     def __init__(self, Hs=None, Tp=None, beta=None, Lp=None):
+        """
+        Test
+
+        :param Hs: description
+        :param Tp: description
+        :param beta: description
+        :param Lp: description
+        """
+
         self.Hs = Hs
         self.Tp = Tp
         self.beta = beta

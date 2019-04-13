@@ -10,6 +10,9 @@ Welcome to py-wave-runup's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. automodule:: models
+   :members:
+   :undoc-members:
 
 
 Indices and tables
