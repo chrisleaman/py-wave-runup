@@ -3,12 +3,10 @@ from abc import ABCMeta, abstractmethod
 import numpy as np
 
 
-class RunupModel(object):
+class RunupModel(metaclass=ABCMeta):
     """
     Abstract base class which our empirical runup models will inherit from
     """
-
-    __metaclass__ = ABCMeta
 
     doi = None
 
