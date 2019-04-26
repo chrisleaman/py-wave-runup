@@ -193,7 +193,7 @@ class Stockdon2006(RunupModel):
         Returns:
             Total amount of swash using Eqn (7):
 
-                .. math:: S = \sqrt{S_{inc}^{2}+S_{ig}^{2}}
+                .. math:: S = \\sqrt{S_{inc}^{2}+S_{ig}^{2}}
         """
         result = np.sqrt(self.sinc ** 2 + self.sig ** 2)
         result = self._return_one_or_array(result)
