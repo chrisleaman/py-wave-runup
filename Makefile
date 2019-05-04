@@ -4,9 +4,14 @@ install:
 docs:
 	poetry run sphinx-build -M html ".\docs" ".\docs\_build"
 
-docs-requirements.txt:
+# Requirements.txt needed to build docs on readthedocs.io
+freeze-requirements:
 	poetry run pip freeze --exclude-editable > ./docs/requirements.txt
 
+#
+bump:
+	poetry version
+	@echo "Remember to increase version in py_wave_runup/__init__.py"
 
 
 ###############################
