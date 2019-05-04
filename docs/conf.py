@@ -30,7 +30,7 @@ release = "v0.1.1"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc"]
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.mathjax", "sphinx.ext.napoleon"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -62,6 +62,9 @@ html_static_path = ["_static"]
 pygments_style = "sphinx"
 
 
+# Autodoc options
+
+# Define what classes to skip
 def autodoc_skip_member(app, what, name, obj, skip, options):
     exclusions = ("RunupModel",)
     exclude = name in exclusions
@@ -70,3 +73,7 @@ def autodoc_skip_member(app, what, name, obj, skip, options):
 
 def setup(app):
     app.connect("autodoc-skip-member", autodoc_skip_member)
+
+
+# Define order
+autodoc_member_order = "bysource"

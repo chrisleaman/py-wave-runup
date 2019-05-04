@@ -3,23 +3,26 @@ from abc import ABCMeta, abstractmethod
 import numpy as np
 
 
-class RunupModel(object):
+class RunupModel(metaclass=ABCMeta):
     """
     Abstract base class which our empirical runup models will inherit from
     """
-
-    __metaclass__ = ABCMeta
 
     doi = None
 
     def __init__(self, Hs=None, Tp=None, beta=None, Lp=None):
         """
-        Test
-
-        :param Hs: description
-        :param Tp: description
-        :param beta: description
-        :param Lp: description
+        Args:
+            Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
+                account for energy dissipation in the nearshore, transform the wave to
+                the nearshore, then reverse-shoal to deep water.
+            beta (:obj:`float` or :obj:`list`): Beach slope. Typically defined as the
+                slope between the region of :math:`\\pm2\\sigma` where :math:`\\sigma`
+                is the standard deviation of the continuous water level record.
+            Tp (:obj:`float` or :obj:`list`): Peak wave period.
+                Must be defined if :attr:`Lp` is not defined.
+            Lp (:obj:`float` or :obj:`list`): Peak wave length
+                Must be definied if :attr:`Tp` is not defined.
         """
 
         self.Hs = Hs
@@ -87,11 +90,48 @@ class RunupModel(object):
 
 
 class Stockdon2006(RunupModel):
+    """
+
+    This class implements the empirical wave runup model from:
+
+        Stockdon, H. F., Holman, R. A., Howd, P. A., & Sallenger, A. H. (2006).
+        Empirical  parameterization of setup, swash, and runup. Coastal Engineering,
+        53(7), 573–588. https://doi.org/10.1016/j.coastaleng.2005.12.005
+
+    Examples:
+        Calculate 2% exceedence runup level, including setup component and swash
+        component given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Stockdon2006
+        >>> sto06 = Stockdon2006(Hs=4, Tp=11, beta=0.1)
+        >>> sto06.R2
+        2.54
+        >>> sto06.setup
+        0.96
+        >>> sto06.swash
+        2.64
+    """
 
     doi = "10.1016/j.coastaleng.2005.12.005"
 
     @property
     def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level. For dissipative beaches (i.e.
+            :math:`\\zeta < 0.3`) Eqn (18) from the paper is used:
+
+            .. math:: R_{2} = 0.043(H_{s}L_{p})^{0.5}
+
+            For intermediate and reflective beaches (i.e. :math:`\\zeta > 0.3`),
+            the function returns the result from Eqn (19):
+
+            .. math::
+
+                R_{2} = 1.1 \\left( 0.35 \\beta (H_{s}L_{p})^{0.5} + \\frac{H_{s}L_{p}(
+                0.563 \\beta^{2} +0.004)^{0.5}}{2} \\right)
+        """
+
         # Generalized runup (Eqn 19)
         result = 1.1 * (
             0.35 * self.beta * (self.Hs * self.Lp) ** 0.5
@@ -109,24 +149,50 @@ class Stockdon2006(RunupModel):
 
     @property
     def setup(self):
+        """
+        Returns:
+            The setup level using Eqn (10):
+
+                .. math:: \\bar{\\eta} = 0.35 \\beta (H_{s}L_{p})^{0.5}
+
+
+        """
         result = 0.35 * self.beta * (self.Hs * self.Lp) ** 0.5
         result = self._return_one_or_array(result)
         return result
 
     @property
     def sinc(self):
+        """
+        Returns:
+            Incident component of swash using Eqn (11):
+
+                .. math:: S_{inc} = 0.75 \\beta (H_{s}L_{p})^{0.5}
+        """
         result = 0.75 * self.beta * (self.Hs * self.Lp) ** 0.5
         result = self._return_one_or_array(result)
         return result
 
     @property
     def sig(self):
+        """
+        Returns:
+            Infragravity component of swash using Eqn (12):
+
+                .. math:: S_{ig} = 0.06 (H_{s}L_{p})^{0.5}
+        """
         result = 0.06 * (self.Hs * self.Lp) ** 0.5
         result = self._return_one_or_array(result)
         return result
 
     @property
     def swash(self):
+        """
+        Returns:
+            Total amount of swash using Eqn (7):
+
+                .. math:: S = \\sqrt{S_{inc}^{2}+S_{ig}^{2}}
+        """
         result = np.sqrt(self.sinc ** 2 + self.sig ** 2)
         result = self._return_one_or_array(result)
         return result
