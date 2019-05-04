@@ -11,7 +11,7 @@ colorama==0.4.1
 coverage==4.5.3
 docutils==0.14
 filelock==3.0.10
-identify==1.4.1
+identify==1.4.2
 idna==2.8
 imagesize==1.1.0
 importlib-metadata==0.9
