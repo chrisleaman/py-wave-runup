@@ -5,10 +5,10 @@ docs:
 	poetry run sphinx-build -M html ".\docs" ".\docs\_build"
 
 # Requirements.txt needed to build docs on readthedocs.io
-freeze-requirements:
+update-requirements:
+	poetery update
 	poetry run pip freeze --exclude-editable > ./docs/requirements.txt
 
-#
 bump:
 	poetry version
 	@echo "Remember to increase version in py_wave_runup/__init__.py"
