@@ -1,3 +1,5 @@
+.PHONY: install docs update-requirements bump
+
 install:
 	poetry install
 

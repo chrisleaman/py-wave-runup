@@ -1,30 +1,3 @@
-=================
-Python Wave Runup
-=================
-::
-
-    Empirical wave runup models implemented in Python for coastal engineers and scientists.
-
-.. image:: https://img.shields.io/pypi/v/py-wave-runup.svg
-        :target: https://pypi.python.org/pypi/py-wave-runup
-
-.. image:: https://img.shields.io/travis/com/chrisleaman/py-wave-runup.svg
-        :target: https://travis-ci.com/chrisleaman/py-wave-runup
-
-.. image:: https://readthedocs.org/projects/py-wave-runup/badge/?version=latest
-    :target: https://py-wave-runup.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
-
-.. image:: https://codecov.io/gh/chrisleaman/py-wave-runup/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/chrisleaman/py-wave-runup
-
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/ambv/black
-
-.. image:: https://api.dependabot.com/badges/status?host=github&identifier=180274721
-     :target: https://dependabot.com
-     :alt: Updates
-
 
 Background
 ----------
@@ -41,7 +14,7 @@ of the water "runup" and rundown the beach. It is comprised of two components:
 Setup, swash and other components of Total Water Level (TWL) rise are shown in this
 handy figure below.
 
-.. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
+.. image:: ./_static/VitousekDoubling2017Fig1.jpg
 ..
 
     | Figure from Vitousek et al. (2017) [#vit17]_
@@ -66,54 +39,7 @@ wave runup models include:
 This python package attempts to consolidate the work done by others in this field and
 collate the numerous empirical relationships for wave runup which have been published.
 
-Installation
-------------
-
-Installation of ``py-wave-runup`` can be done with pip:
-
-.. code:: bash
-
-    pip install py-wave-runup
-
-
-Usage
------
-
-.. code:: python
-
-    from py_wave_runup import models
-
-    model_sto06 = models.Stockdon2006(Hs=4, Tp=12, beta=0.1)
-
-    model_sto06.R2     # 2.54
-    model_sto06.setup  # 0.96
-    model_sto06.sinc   # 2.06
-    model_sto06.sig    # 1.65
-
-
-Documentation
--------------
-Documentation is located at  https://py-wave-runup.readthedocs.io.
-
-
-Contributing
-------------
-
-1. Fork it (https://github.com/chrisleaman/py-wave-runup/fork)
-2. Create your feature branch (``git checkout -b feature/fooBar``)
-3. Commit your changes (``git commit -am 'Add some fooBar``)
-4. Push to the branch (``git push origin feature/fooBar``)
-5. Create a new Pull Request
-
-
-License
 --------
-
-Distributed under the GNU General Public License v3.
-
-
-References
-----------
 
 .. [#vit17] Vitousek, Sean, Patrick L. Barnard, Charles H. Fletcher, Neil Frazer,
        Li Erikson, and Curt D. Storlazzi. "Doubling of Coastal Flooding Frequency
