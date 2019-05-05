@@ -23,7 +23,7 @@ copyright = "2019, Chris Leaman"
 author = "Chris Leaman"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.1"
+release = "v0.1.2"
 
 
 # -- General configuration ---------------------------------------------------
@@ -68,6 +68,18 @@ pygments_style = "sphinx"
 
 html_sidebars = {
     "**": ["globaltoc.html", "relations.html", "sourcelink.html", "searchbox.html"]
+}
+
+html_sidebars = {
+    "**": ["about.html", "navigation.html", "relations.html", "searchbox.html"]
+}
+
+html_theme_options = {
+    "description": "Empirical wave runup models implemented in Python for coastal engineers and scientists.",
+    "github_user": "chrisleaman",
+    "github_repo": "py-wave-runup",
+    "fixed_sidebar": True,
+    "github_button": True,
 }
 
 # Autodoc options

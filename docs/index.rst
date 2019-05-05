@@ -22,6 +22,11 @@ Python Wave Runup
      :target: https://dependabot.com
      :alt: Updates
 
+**py-wave-runup** is a Python module which makes it easy for coastal engineers and
+scientists to test and use various empirical wave runup models which have been
+published in literature.
+
+To get started, check out the sections below:
 
 Contents
 ~~~~~~~~
@@ -35,6 +40,4 @@ Contents
    models
 
 ..
-
-    Empirical wave runup models implemented in Python for coastal engineers and scientists.
 
