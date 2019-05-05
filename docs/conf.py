@@ -23,14 +23,19 @@ copyright = "2019, Chris Leaman"
 author = "Chris Leaman"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.1"
+release = "v0.1.3"
 
 
 # -- General configuration ---------------------------------------------------
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.mathjax", "sphinx.ext.napoleon"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.autosummary",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -61,6 +66,21 @@ html_static_path = ["_static"]
 
 pygments_style = "sphinx"
 
+html_sidebars = {
+    "**": ["globaltoc.html", "relations.html", "sourcelink.html", "searchbox.html"]
+}
+
+html_sidebars = {
+    "**": ["about.html", "navigation.html", "relations.html", "searchbox.html"]
+}
+
+html_theme_options = {
+    "description": "Empirical wave runup models implemented in Python for coastal engineers and scientists.",
+    "github_user": "chrisleaman",
+    "github_repo": "py-wave-runup",
+    "fixed_sidebar": True,
+    "github_button": True,
+}
 
 # Autodoc options
 

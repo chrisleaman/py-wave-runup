@@ -1,3 +1,5 @@
+.PHONY: install docs update-requirements bump
+
 install:
 	poetry install
 
@@ -12,6 +14,7 @@ update-requirements:
 bump:
 	poetry version
 	@echo "Remember to increase version in py_wave_runup/__init__.py"
+	@echo "and in docs/conf.py"
 
 
 ###############################
