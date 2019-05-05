@@ -23,7 +23,7 @@ copyright = "2019, Chris Leaman"
 author = "Chris Leaman"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.2"
+release = "v0.1.3"
 
 
 # -- General configuration ---------------------------------------------------
