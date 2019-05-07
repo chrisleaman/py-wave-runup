@@ -69,22 +69,18 @@ class RunupModel(metaclass=ABCMeta):
         raise NotImplementedError
 
     @property
-    @abstractmethod
     def setup(self):
         raise NotImplementedError
 
     @property
-    @abstractmethod
     def sinc(self):
         raise NotImplementedError
 
     @property
-    @abstractmethod
     def sig(self):
         raise NotImplementedError
 
     @property
-    @abstractmethod
     def swash(self):
         raise NotImplementedError
 
@@ -194,5 +190,166 @@ class Stockdon2006(RunupModel):
                 .. math:: S = \\sqrt{S_{inc}^{2}+S_{ig}^{2}}
         """
         result = np.sqrt(self.sinc ** 2 + self.sig ** 2)
+        result = self._return_one_or_array(result)
+        return result
+
+
+class Power2018(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Power, H.E., Gharabaghi, B., Bonakdari, H., Robertson, B., Atkinson, A.L.,
+        Baldock, T.E., 2018. Prediction of wave runup on beaches using
+        Gene-Expression Programming and empirical relationships. Coastal Engineering.
+        https://doi.org/10.1016/j.coastaleng.2018.10.006
+
+    Examples:
+        Calculate 2% exceedence runup level, including setup component and swash
+        component given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Power2018
+        >>> pow18 = Power2018(Hs=1, Tp=8, beta=0.07, r=0.00075)
+        >>> pow18.R2
+        1.12
+    """
+
+    doi = "10.1016/j.coastaleng.2018.10.006"
+
+    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
+        """
+        Args:
+            Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
+                account for energy dissipation in the nearshore, transform the wave to
+                the nearshore, then reverse-shoal to deep water.
+            beta (:obj:`float` or :obj:`list`): Beach slope. Typically defined as the
+                slope between the region of :math:`\\pm2\\sigma` where :math:`\\sigma`
+                is the standard deviation of the continuous water level record.
+            Tp (:obj:`float` or :obj:`list`): Peak wave period.
+                Must be defined if :attr:`Lp` is not defined.
+            Lp (:obj:`float` or :obj:`list`): Peak wave length
+                Must be definied if :attr:`Tp` is not defined.
+            r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
+                approximated by :math:`r=2.5D_{50}`.
+        """
+
+        RunupModel.__init__(self, Hs, Tp, beta, Lp)
+
+        self.r = np.atleast_1d(r)
+
+        # Ensure hydraulic roughness is specified
+        if r is None:
+            raise ValueError("Expected either hydraulic roughness, r, arg")
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, based on following dimensionless parameters:
+
+            .. math::
+
+                x_{1} &= \\frac{H_{s}}{L_{p}} \\\\
+                x_{2} &= \\beta \\\\
+                x_{3} &= \\frac{r}{H_{s}}
+
+            The final equation is given by the form:
+
+            .. math::
+
+               R_{2} &= H_{s} \\times ( \\\\
+                &(x_{2} + (((x_{3} \\times 3) / e^{-5}) \\times ((3 \\times x_{3}) \\times x_{3}))) \\\\
+                &+ ((((x_{1} + x_{3}) - 2) - (x_{3} - x_{2})) + ((x_{2} - x_{1}) - x_{3})) \\\\
+                &+ (((x_{3}^{x_{1}}) - (x_{3}^{\\frac{1}{3}})) - ((e^{x_{2}})^{(x_{1} \\times 3)})) \\\\
+                &+ \\sqrt{(((x_{3} + x_{1}) - x_{2}) - (x_{2} + \\log_{10}x_{3}))} \\\\
+                &+ ((((x_{2}^{2}) / (x_{1}^{\\frac{1}{3}}))^{(x_{1}^{\\frac{1}{3}})}) - \\sqrt{x_{3}}) \\\\
+                &+ ( (x_{2} + ((x_{3} / x_{1})^{\\frac{1}{3}})) + (\\log(2) - (1 / (1 + e^{-(x_{2} + x_{3})}))) ) \\\\
+                &+ ((\\sqrt{x_{3}} - (((3^{2}) + 3) \\times (x_{2}^{2})))^{2}) \\\\
+                &+ ((((x_{3} \\times -5)^{2})^{2}) + (((x_{3} + x_{3}) \\times x_{1}) / (x_{2}^{2}))) \\\\
+                &+ \\log{(\\sqrt{((x_{2}^{2}) + (x_{3}^{\\frac{1}{3}}))} + ((x_{2} + 3)^{\\frac{1}{3}}))} \\\\
+                &+ ( (((x_{1} / x_{3}) \\times (-5^{2})) \\times (x_{3}^{2})) - \\log_{10}{(1 / (1 + \\exp^{-(x_{2} + x_{3})}))} ) \\\\
+                &+ (x_{1}^{x_{3}}) \\\\
+                &+ \\exp^{-((((x_{3} / x_{1})^{\\exp^{4}}) + ((\\exp^{x_{3}})^{3}))^{2})} \\\\
+                &+ \\exp^{(\\log{(x_{2} - x_{3})} - \\log{\\exp^{-((-1 + x_{1})^{2})}})} \\\\
+                &+ ((\\sqrt{4} \\times (((x_{3} / x_{2}) - x_{2}) - (0 - x_{1})))^{2}) \\\\
+                &+ (2 \\times ((((-5 \\times x_{3}) + x_{1}) \\times (2 - x_{3})) - 2)) \\\\
+                &+ ((\\sqrt{4} \\times (((x_{3} / x_{2}) - x_{2}) - (0 - x_{1})))^{2}) \\\\
+                &+ ((((-5 + x_{1}) - x_{2}) \\times (x_{2} - x_{3})) \\times ((x_{1} - x_{2}) - (-4^{-5}))) \\\\
+                &+ (\\exp^{-((x_{2} + (-5 - x_{1}))^{2})} + ((x_{2} + 5) \\times (x_{3}^{2}))) \\\\
+                &+ \\sqrt{ 1 / ( 1 + \\exp^{ -( (\\exp^{x_{1}} - \\exp^{-((x_{3} + x_{3})^{2})}) + ((x_{1}^{x_{3}}) - (x_{3} \\times 4)) ) } ) } \\\\
+                &+ ( ( \\exp^{ -( ( ( ( \\exp^{ -( ( (\\sqrt{x_{3}} \\times 4) + (1 / (1 + \\exp^{-(x_{2} + 2)})) )^{2} ) } )^{2} ) + x_{1} )^{2} ) } )^{3} ) \\\\
+                )
+        """
+
+        # Power et al. defines these three dimensionless parameters in Eqn (9)
+        x1 = self.Hs / self.Lp
+        x2 = self.beta
+        x3 = self.r / self.Hs
+
+        result = self.Hs * (
+            (x2 + (((x3 * 3) / np.exp(-5)) * ((3 * x3) * x3)))
+            + ((((x1 + x3) - 2) - (x3 - x2)) + ((x2 - x1) - x3))
+            + (((x3 ** x1) - (x3 ** (1 / 3))) - (np.exp(x2) ** (x1 * 3)))
+            + np.sqrt((((x3 + x1) - x2) - (x2 + np.log10(x3))))
+            + ((((x2 ** 2) / (x1 ** (1 / 3))) ** (x1 ** (1 / 3))) - np.sqrt(x3))
+            + (
+                (x2 + ((x3 / x1) ** (1 / 3)))
+                + (np.log(2) - (1 / (1 + np.exp(-(x2 + x3)))))
+            )
+            + ((np.sqrt(x3) - (((3 ** 2) + 3) * (x2 ** 2))) ** 2)
+            + ((((x3 * -5) ** 2) ** 2) + (((x3 + x3) * x1) / (x2 ** 2)))
+            + np.log((np.sqrt(((x2 ** 2) + (x3 ** (1 / 3)))) + ((x2 + 3) ** (1 / 3))))
+            + (
+                (((x1 / x3) * (-5 ** 2)) * (x3 ** 2))
+                - np.log10((1 / (1 + np.exp(-(x2 + x3)))))
+            )
+            + (x1 ** x3)
+            + np.exp(-((((x3 / x1) ** np.exp(4)) + (np.exp(x3) ** 3)) ** 2))
+            + np.exp((np.log((x2 - x3)) - np.log(np.exp(-((-1 + x1) ** 2)))))
+            + ((np.sqrt(4) * (((x3 / x2) - x2) - (0 - x1))) ** 2)
+            + (2 * ((((-5 * x3) + x1) * (2 - x3)) - 2))
+            + ((np.sqrt(4) * (((x3 / x2) - x2) - (0 - x1))) ** 2)
+            + ((((-5 + x1) - x2) * (x2 - x3)) * ((x1 - x2) - (-4 ** -5)))
+            + (np.exp(-((x2 + (-5 - x1)) ** 2)) + ((x2 + 5) * (x3 ** 2)))
+            + np.sqrt(
+                1
+                / (
+                    1
+                    + np.exp(
+                        -(
+                            (np.exp(x1) - np.exp(-((x3 + x3) ** 2)))
+                            + ((x1 ** x3) - (x3 * 4))
+                        )
+                    )
+                )
+            )
+            + (
+                (
+                    np.exp(
+                        -(
+                            (
+                                (
+                                    (
+                                        np.exp(
+                                            -(
+                                                (
+                                                    (np.sqrt(x3) * 4)
+                                                    + (1 / (1 + np.exp(-(x2 + 2))))
+                                                )
+                                                ** 2
+                                            )
+                                        )
+                                    )
+                                    ** 2
+                                )
+                                + x1
+                            )
+                            ** 2
+                        )
+                    )
+                )
+                ** 3
+            )
+        )
+
         result = self._return_one_or_array(result)
         return result
