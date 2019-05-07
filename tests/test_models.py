@@ -38,3 +38,27 @@ class TestStockdon2006(object):
     def test_different_list_input(self):
         with raises(ValueError):
             models.Stockdon2006(Hs=[1, 2], Lp=[100, 200], beta=[0.1])
+
+
+class TestPower2018(object):
+    def test_reflective(self):
+        model = models.Power2018(Hs=4, Tp=11, beta=0.1, r=0.00075)
+        assert model.R2 == approx(4.79, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Power2018(Hs=4, Tp=11, beta=0.001, r=0.00075)
+        assert model.R2 == approx(33.75, abs=0.01)
+
+    def test_low_wave_conditions(self):
+        model = models.Power2018(Hs=1, Tp=8, beta=0.07, r=0.00075)
+        assert model.R2 == approx(1.12, abs=0.01)
+
+    def test_list_input(self):
+        model = models.Power2018(
+            Hs=[1, 2], Lp=[100, 200], beta=[0.05, 0.1], r=[0.00075, 0.00075]
+        )
+        assert model.R2 == approx((0.922, 2.88), abs=0.1)
+
+    def test_no_roughness(self):
+        with raises(ValueError):
+            model = models.Power2018(Hs=4, Tp=11, beta=0.1)
