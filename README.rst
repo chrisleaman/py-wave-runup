@@ -5,6 +5,9 @@ Python Wave Runup
 
     Empirical wave runup models implemented in Python for coastal engineers and scientists.
 
+.. image:: https://zenodo.org/badge/180274721.svg
+   :target: https://zenodo.org/badge/latestdoi/180274721
+
 .. image:: https://img.shields.io/pypi/v/py-wave-runup.svg
         :target: https://pypi.python.org/pypi/py-wave-runup
 
@@ -20,10 +23,6 @@ Python Wave Runup
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/ambv/black
-
-.. image:: https://api.dependabot.com/badges/status?host=github&identifier=180274721
-     :target: https://dependabot.com
-     :alt: Updates
 
 
 Background
@@ -104,6 +103,12 @@ Contributing
 3. Commit your changes (``git commit -am 'Add some fooBar``)
 4. Push to the branch (``git push origin feature/fooBar``)
 5. Create a new Pull Request
+
+
+Citation
+--------
+
+If this package has been useful to you, please cite the following DOI: https://doi.org/10.5281/zenodo.2667464
 
 
 License
