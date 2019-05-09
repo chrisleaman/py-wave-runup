@@ -364,7 +364,7 @@ class Holman1986(RunupModel):
         Calculate 2% exceedence runup level, including setup component given Hs=4m,
         Tp=11s, beta=0.1.
 
-        >>> from py_wave_runup.models import Power2018
+        >>> from py_wave_runup.models import Holman1986
         >>> hol86 = Holman1986(Hs=4, Tp=11, beta=0.1)
         >>> hol86.R2
         3.09
@@ -392,7 +392,7 @@ class Holman1986(RunupModel):
         Returns:
             The setup level using:
 
-                .. math:: S = 0.2 H_{s}
+                .. math:: \\bar{\\eta} = 0.2 H_{s}
         """
         result = 0.2 * self.Hs
         result = self._return_one_or_array(result)
@@ -409,8 +409,8 @@ class Nielsen2009(RunupModel):
         Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
 
         >>> from py_wave_runup.models import Nielsen2009
-        >>> niel = Holman1986(Hs=4, Tp=11, beta=0.1)
-        >>> niel.R2
+        >>> niel09 = Nielsen2009(Hs=4, Tp=11, beta=0.1)
+        >>> niel09.R2
         3.27
     """
 
