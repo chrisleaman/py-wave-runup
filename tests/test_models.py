@@ -62,3 +62,20 @@ class TestPower2018(object):
     def test_no_roughness(self):
         with raises(ValueError):
             model = models.Power2018(Hs=4, Tp=11, beta=0.1)
+
+
+class TestHolman1986(object):
+    def test_reflective(self):
+        model = models.Holman1986(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(3.09, abs=0.01)
+        assert model.setup == approx(0.8, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Holman1986(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(0.82, abs=0.01)
+        assert model.setup == approx(0.8, abs=0.01)
+
+    def test_list_input(self):
+        model = models.Holman1986(Hs=[1, 2], Lp=[100, 200], beta=[0.05, 0.1])
+        assert model.R2 == approx((0.62, 2.06), abs=0.1)
+        assert model.setup == approx((0.2, 0.4), abs=0.01)

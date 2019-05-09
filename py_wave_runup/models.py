@@ -150,8 +150,6 @@ class Stockdon2006(RunupModel):
             The setup level using Eqn (10):
 
                 .. math:: \\bar{\\eta} = 0.35 \\beta (H_{s}L_{p})^{0.5}
-
-
         """
         result = 0.35 * self.beta * (self.Hs * self.Lp) ** 0.5
         result = self._return_one_or_array(result)
@@ -204,8 +202,7 @@ class Power2018(RunupModel):
         https://doi.org/10.1016/j.coastaleng.2018.10.006
 
     Examples:
-        Calculate 2% exceedence runup level, including setup component and swash
-        component given Hs=4m, Tp=11s, beta=0.1.
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
 
         >>> from py_wave_runup.models import Power2018
         >>> pow18 = Power2018(Hs=1, Tp=8, beta=0.07, r=0.00075)
@@ -351,5 +348,52 @@ class Power2018(RunupModel):
             )
         )
 
+        result = self._return_one_or_array(result)
+        return result
+
+
+class Holman1986(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Holman, R.A., 1986. Extreme value statistics for wave run-up on a natural
+        beach. Coastal Engineering 9, 527–544. https://doi.org/10.1016/0378-3839(
+        86)90002-5
+
+    Examples:
+        Calculate 2% exceedence runup level, including setup component given Hs=4m,
+        Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Power2018
+        >>> hol86 = Holman1986(Hs=4, Tp=11, beta=0.1)
+        >>> hol86.R2
+        3.09
+        >>> hol86.setup
+        0.8
+    """
+
+    doi = "10.1016/0378-3839(86)90002-5"
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by
+
+                .. math:: R_{2} = 0.83 \\tan{\\beta} \\sqrt{H_{s}+L_{p}} + 0.2 H_{s}
+        """
+        result = 0.83 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp) + 0.2 * self.Hs
+        result = self._return_one_or_array(result)
+        return result
+
+    @property
+    def setup(self):
+        """
+        Returns:
+            The setup level using:
+
+                .. math:: S = 0.2 H_{s}
+        """
+        result = 0.2 * self.Hs
         result = self._return_one_or_array(result)
         return result
