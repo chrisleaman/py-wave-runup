@@ -25,6 +25,17 @@ Python Wave Runup
     :target: https://github.com/ambv/black
 
 
+Contents
+----------
+- `Background`_
+- `Installation`_
+- `Documentation`_
+- `Contributing`_
+- `Citation`_
+- `License`_
+- `References`_
+
+
 Background
 ----------
 
@@ -78,6 +89,16 @@ Installation of ``py-wave-runup`` can be done with pip:
 Usage
 -----
 
+The following `wave runup models`_ are available for use:
+
+- `models.Stockdon2006`: The most commonly cited and widely used runup model.
+- `models.Power2018`: Based on the Gene-Expression Programming technique.
+- `models.Holman1986`: Incorporated wave setup using Duck, NC measurements.
+- `models.Nielsen2009`: Based on runup measurements from NSW, Australia.
+
+To get calculate runup, setup and swash, define your offshore conditions in your
+selected runup model then you can access each parameter:
+
 .. code:: python
 
     from py_wave_runup import models
@@ -89,10 +110,11 @@ Usage
     model_sto06.sinc   # 2.06
     model_sto06.sig    # 1.65
 
+.. _wave runup models: https://py-wave-runup.readthedocs.io/en/develop/models.html
 
 Documentation
 -------------
-Documentation is located at  https://py-wave-runup.readthedocs.io.
+Documentation is located at https://py-wave-runup.readthedocs.io.
 
 
 Contributing
