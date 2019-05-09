@@ -397,3 +397,45 @@ class Holman1986(RunupModel):
         result = 0.2 * self.Hs
         result = self._return_one_or_array(result)
         return result
+
+
+class Nielsen2009(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        P. Nielsen, Coastal and Estuarine Processes, Singapore, World Scientiﬁc, 2009.
+
+    Examples:
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Nielsen2009
+        >>> niel = Holman1986(Hs=4, Tp=11, beta=0.1)
+        >>> niel.R2
+        3.27
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by
+
+                .. math:: R_{2} = 1.98L_{R} + Z_{100}
+
+            This relationship was first suggested by Nielsen and Hanslow (1991). The
+            definitions for :math:`L_{R}` were then updated by Nielsen (2009),
+            where :math:`L_{R} = 0.6 \\tan{\\beta} \\sqrt{H_{rms}L_{s}}` for
+            :math:`\\tan{\\beta} \geq 0.1` and :math:`L_{R} = 0.06\\sqrt{H_{rms}L_{s}}`
+            for :math:`\\tan{\\beta}<0.1`. Note that :math:`Z_{100}` is the highest
+            vertical level passed by all swash events in a time period and is usually
+            taken as the tide varying water level.
+        """
+
+        # Two different definitions of LR dependant on slope:
+        beta_mask = np.tan(self.beta) < 0.1
+        LR = 0.6 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp)
+        LR[beta_mask] = 0.06 * np.sqrt(self.Hs * self.Lp)
+
+        result = 1.98 * LR
+        result = self._return_one_or_array(result)
+        return result

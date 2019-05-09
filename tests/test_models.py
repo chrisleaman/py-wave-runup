@@ -79,3 +79,9 @@ class TestHolman1986(object):
         model = models.Holman1986(Hs=[1, 2], Lp=[100, 200], beta=[0.05, 0.1])
         assert model.R2 == approx((0.62, 2.06), abs=0.1)
         assert model.setup == approx((0.2, 0.4), abs=0.01)
+
+
+class TestNielsen2009(object):
+    def test_reflective(self):
+        model = models.Nielsen2009(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(3.27, abs=0.01)
