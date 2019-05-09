@@ -91,10 +91,10 @@ Usage
 
 The following `wave runup models`_ are available for use:
 
-- `models.Stockdon2006`: The most commonly cited and widely used runup model.
-- `models.Power2018`: Based on the Gene-Expression Programming technique.
-- `models.Holman1986`: Incorporated wave setup using Duck, NC measurements.
-- `models.Nielsen2009`: Based on runup measurements from NSW, Australia.
+- ``models.Stockdon2006``: The most commonly cited and widely used runup model.
+- ``models.Power2018``: Based on the Gene-Expression Programming technique.
+- ``models.Holman1986``: Incorporated wave setup using Duck, NC measurements.
+- ``models.Nielsen2009``: Based on runup measurements from NSW, Australia.
 
 To get calculate runup, setup and swash, define your offshore conditions in your
 selected runup model then you can access each parameter:
