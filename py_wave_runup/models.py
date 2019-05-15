@@ -522,7 +522,7 @@ class Atkinson2017(RunupModel):
         >>> from py_wave_runup.models import Atkinson2017
         >>> atk17 = Atkinson2017(Hs=4, Tp=11, beta=0.1)
         >>> atk17.R2
-        1.0
+        3.17
     """
 
     @property
