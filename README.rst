@@ -58,6 +58,7 @@ The following `wave runup models`_ are available for use:
 - ``models.Holman1986``: Incorporated wave setup using Duck, NC measurements.
 - ``models.Nielsen2009``: Based on runup measurements from NSW, Australia.
 - ``models.Ruggiero2001``: Based on runup measurements from dissipative Orgeon beaches.
+- ``models.Vousdoukas2012``: Based on runup from European Atlantic coast
 
 To get calculate runup, setup and swash, define your offshore conditions in your
 selected runup model then you can access each parameter:

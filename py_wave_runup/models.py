@@ -445,9 +445,9 @@ class Ruggiero2001(RunupModel):
     """
     This class implements the empirical wave runup model from:
 
-    Ruggiero, P., Komar, P.D., McDougal, W.G., Marra, J.J., Beach, R.A., 2001. Wave
-    Runup, Extreme Water Levels and the Erosion of Properties Backing Beaches. Journal
-    of Coastal Research 17, 407–419.
+        Ruggiero, P., Komar, P.D., McDougal, W.G., Marra, J.J., Beach, R.A., 2001. Wave
+        Runup, Extreme Water Levels and the Erosion of Properties Backing Beaches. Journal
+        of Coastal Research 17, 407–419.
 
     Examples:
         Calculates 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
@@ -455,7 +455,7 @@ class Ruggiero2001(RunupModel):
         >>> from py_wave_runup.models import Ruggiero2001
         >>> rug01 = Ruggiero2001(Hs=4, Tp=11, beta=0.1)
         >>> rug01.R2
-        1.0
+        2.35
     """
 
     @property
@@ -469,4 +469,39 @@ class Ruggiero2001(RunupModel):
 
         result = 0.27 * np.sqrt(self.beta * self.Hs * self.Lp)
         result = self._return_one_or_array(result)
+        return result
+
+
+class Vousdoukas2012(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Vousdoukas, M.I., Wziatek, D., Almeida, L.P., 2012. Coastal vulnerability assessment
+        based on video wave run-up observations at a mesotidal, steep-sloped beach. Ocean
+        Dynamics 62, 123–137. https://doi.org/10.1007/s10236-011-0480-x
+
+    Examples:
+        Calculates 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Vousdoukas2012
+        >>> vou12 = Vousdoukas2012(Hs=4, Tp=11, beta=0.1)
+        >>> vou12.R2
+        2.14
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math: R_{2} = 0.53 \\beta \\sqrt{H_{s}L_{p}} + 0.58 \\tan{\\beta}\\beta H_{s} + 0.45
+        """
+
+        result = (
+            0.53 * self.beta * np.sqrt(self.Hs * self.Lp)
+            + 0.58 * np.tan(self.beta) * self.Hs
+            + 0.45
+        )
+        resul = self._return_one_or_array(result)
         return result
