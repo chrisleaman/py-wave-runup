@@ -537,3 +537,46 @@ class Atkinson2017(RunupModel):
         result = 0.92 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp) + 0.16 * self.Hs
         result = self._return_one_or_array(result)
         return result
+
+
+class Senechal2011(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Senechal, N., Coco, G., Bryan, K.R., Holman, R.A., 2011. Wave runup during extreme
+        storm conditions. Journal of Geophysical Research 116.
+        https://doi.org/10.1029/2010JC006819
+
+     Examples:
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1
+
+        >>> from py_wave_runup.models import Senechal2011
+        >>> sen11 = Senechal2011(Hs=4, Tp=11, beta=0.1)
+        >>> sen11.R2
+        1.97
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math:: R_{2} = 2.14 \\times \\tanh{0.4 H_{s}}
+        """
+
+        result = 2.14 * np.tanh(0.4 * self.Hs)
+        result = self._return_one_or_array(result)
+        return result
+
+    @property
+    def sig(self):
+        """
+        Returns:
+            Infragravity componennt of swash:
+
+                .. math: S_{ig} = 0.05 * (H_{s} L_{p})^{0.5}
+        """
+        result = 0.05 * np.sqrt(self.Hs * self.Lp)
+        result = self._return_one_or_array(result)
+        return result
