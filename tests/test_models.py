@@ -105,3 +105,13 @@ class TestVousdoukas2012(object):
     def test_dissipative(self):
         model = models.Vousdoukas2012(Hs=4, Tp=11, beta=0.001)
         assert model.R2 == approx(0.47, abs=0.01)
+
+
+class TestAtkinson2018(object):
+    def test_reflective(self):
+        model = models.Atkinson2017(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(3.17, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Atkinson2017(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(0.67, abs=0.01)

@@ -505,3 +505,35 @@ class Vousdoukas2012(RunupModel):
         )
         resul = self._return_one_or_array(result)
         return result
+
+
+class Atkinson2017(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Atkinson, A.L., Power, H.E., Moura, T., Hammond, T., Callaghan, D.P., Baldock, T.E.,
+        2017. Assessment of runup predictions by empirical models on non-truncated beaches
+        on the south-east Australian coast. Coastal Engineering 119, 15–31.
+        https://doi.org/10.1016/j.coastaleng.2016.10.001
+
+    Examples:
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1
+
+        >>> from py_wave_runup.models import Atkinson2017
+        >>> atk17 = Atkinson2017(Hs=4, Tp=11, beta=0.1)
+        >>> atk17.R2
+        1.0
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math: R_{2} = 0.92 \\tan{\\beta} \\sqrt{H_{s} L_{p}} + 0.16 H_{s}
+        """
+
+        result = 0.92 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp) + 0.16 * self.Hs
+        result = self._return_one_or_array(result)
+        return result
