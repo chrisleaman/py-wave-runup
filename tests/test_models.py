@@ -85,3 +85,13 @@ class TestNielsen2009(object):
     def test_reflective(self):
         model = models.Nielsen2009(Hs=4, Tp=11, beta=0.1)
         assert model.R2 == approx(3.27, abs=0.01)
+
+
+class TestRuggiero2001(object):
+    def test_reflective(self):
+        model = models.Ruggiero2001(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(2.35, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Ruggiero2001(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(0.23, abs=0.01)

@@ -439,3 +439,34 @@ class Nielsen2009(RunupModel):
         result = 1.98 * LR
         result = self._return_one_or_array(result)
         return result
+
+
+class Ruggiero2001(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+    Ruggiero, P., Komar, P.D., McDougal, W.G., Marra, J.J., Beach, R.A., 2001. Wave
+    Runup, Extreme Water Levels and the Erosion of Properties Backing Beaches. Journal
+    of Coastal Research 17, 407–419.
+
+    Examples:
+        Calculates 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Ruggiero2001
+        >>> rug01 = Ruggiero2001(Hs=4, Tp=11, beta=0.1)
+        >>> rug01.R2
+        1.0
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math:: R_{2} = 0.27 \\sqrt{\\beta H_{s} L_{p}}
+        """
+
+        result = 0.27 * np.sqrt(self.beta * self.Hs * self.Lp)
+        result = self._return_one_or_array(result)
+        return result
