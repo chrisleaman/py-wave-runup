@@ -27,54 +27,16 @@ Python Wave Runup
 
 Contents
 ----------
-- `Background`_
 - `Installation`_
+- `Usage`_
 - `Documentation`_
+- `Background`_
 - `Contributing`_
 - `Citation`_
 - `License`_
 - `References`_
 
 
-Background
-----------
-
-Wave runup refers to the final part of a wave's journey as it travels from offshore
-onto the beach. It is observable by anyone who goes to the beach and watches the edge
-of the water "runup" and rundown the beach. It is comprised of two components:
-
-    - **setup**: the height of the time averaged superelevation of the mean water level
-      above the Still Water Level (SWL)
-    - **swash**: the height of the time varying fluctuation of the instantaneous water
-      level about the setup elevation
-
-Setup, swash and other components of Total Water Level (TWL) rise are shown in this
-handy figure below.
-
-.. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
-..
-
-    | Figure from Vitousek et al. (2017) [#vit17]_
-
-Wave runup can contribute a significant portion of the increase in TWL in coastal
-storms causing erosion and inundation. For example, Stockdon et al. (2006) [#sto06]_
-collated data from numerous experiments, some of which showed wave runup 2% excedence
-heights in excess of 3 m during some storms.
-
-Given the impact such a large increase in TWL can have on coastlines, there has been
-much research conducted to try improve our understanding of wave runup processes.
-Although there are many processes which can influence wave runup (such as nonlinear
-wave transformation, wave reflection, three-dimensional effects, porosity, roughness,
-permeability and groundwater) [#cem06]_, many attempts have been made to derive
-empirical relatinoships based on easily measurable parameters. Typically, empirical
-wave runup models include:
-
-    - **Hs**: significant wave height
-    - **Tp**: peak wave length
-    - **beta**: beach slope
-
-This python package attempts to consolidate the work done by others in this field and
-collate the numerous empirical relationships for wave runup which have been published.
 
 Installation
 ------------
@@ -117,14 +79,64 @@ Documentation
 Documentation is located at https://py-wave-runup.readthedocs.io.
 
 
+Background
+----------
+
+Wave runup refers to the final part of a wave's journey as it travels from offshore
+onto the beach. It is observable by anyone who goes to the beach and watches the edge
+of the water "runup" and rundown the beach. It is comprised of two components:
+
+    - **setup**: the height of the time averaged superelevation of the mean water level
+      above the Still Water Level (SWL)
+    - **swash**: the height of the time varying fluctuation of the instantaneous water
+      level about the setup elevation
+
+Setup, swash and other components of Total Water Level (TWL) rise are shown in this
+handy figure below.
+
+.. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
+..
+
+    | Figure from Vitousek et al. (2017) [#vit17]_
+
+Wave runup can contribute a significant portion of the increase in TWL in coastal
+storms causing erosion and inundation. For example, Stockdon et al. (2006) [#sto06]_
+collated data from numerous experiments, some of which showed wave runup 2% excedence
+heights in excess of 3 m during some storms.
+
+Given the impact such a large increase in TWL can have on coastlines, there has been
+much research conducted to try improve our understanding of wave runup processes.
+Although there are many processes which can influence wave runup (such as nonlinear
+wave transformation, wave reflection, three-dimensional effects, porosity, roughness,
+permeability and groundwater) [#cem06]_, many attempts have been made to derive
+empirical relatinoships based on easily measurable parameters. Typically, empirical
+wave runup models include:
+
+    - **Hs**: significant wave height
+    - **Tp**: peak wave length
+    - **beta**: beach slope
+
+This python package attempts to consolidate the work done by others in this field and
+collate the numerous empirical relationships for wave runup which have been published.
+
 Contributing
 ------------
 
+As there are many different empirical wave models out there, contributions are most
+welcome. If you don't feel confident about changing the code yourself, feel free to open
+a `Github issue`_ and let us know what could be added. Otherwise, follow the steps below
+to create a Pull Request:
+
+.. _Github issue: https://github.com/chrisleaman/py-wave-runup/issues
+
 1. Fork it (https://github.com/chrisleaman/py-wave-runup/fork)
-2. Create your feature branch (``git checkout -b feature/fooBar``)
-3. Commit your changes (``git commit -am 'Add some fooBar``)
-4. Push to the branch (``git push origin feature/fooBar``)
-5. Create a new Pull Request
+2. Create the development environment (``poetry install``)
+3. Create your feature branch (``git checkout -b feature/fooBar``)
+4. Add and run tests (``poetry run pytest``)
+5. Update and check documentation compiles (``poetry run sphinx-build -M html ".\docs" ".\docs\_build"``)
+6. Commit your changes (``git commit -am 'Add some fooBar``)
+7. Push to the branch (``git push origin feature/fooBar``)
+8. Create a new Pull Request
 
 
 Citation
