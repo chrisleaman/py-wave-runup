@@ -14,7 +14,7 @@ python = "^3.5 || ^3.6 || ^3.7"
 numpy = "^1.16"
 
 [tool.poetry.dev-dependencies]
-tox = "^3.11"
+tox = "^3.12"
 coverage = "^4.5"
 pytest-runner = "^5.1"
 pytest = "^4.5"
