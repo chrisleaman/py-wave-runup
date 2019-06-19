@@ -425,7 +425,7 @@ class Nielsen2009(RunupModel):
             This relationship was first suggested by Nielsen and Hanslow (1991). The
             definitions for :math:`L_{R}` were then updated by Nielsen (2009),
             where :math:`L_{R} = 0.6 \\tan{\\beta} \\sqrt{H_{rms}L_{s}}` for
-            :math:`\\tan{\\beta} \geq 0.1` and :math:`L_{R} = 0.06\\sqrt{H_{rms}L_{s}}`
+            :math:`\\tan{\\beta} \\geq 0.1` and :math:`L_{R} = 0.06\\sqrt{H_{rms}L_{s}}`
             for :math:`\\tan{\\beta}<0.1`. Note that :math:`Z_{100}` is the highest
             vertical level passed by all swash events in a time period and is usually
             taken as the tide varying water level.
