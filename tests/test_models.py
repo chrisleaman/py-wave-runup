@@ -85,3 +85,45 @@ class TestNielsen2009(object):
     def test_reflective(self):
         model = models.Nielsen2009(Hs=4, Tp=11, beta=0.1)
         assert model.R2 == approx(3.27, abs=0.01)
+
+
+class TestRuggiero2001(object):
+    def test_reflective(self):
+        model = models.Ruggiero2001(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(2.35, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Ruggiero2001(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(0.23, abs=0.01)
+
+
+class TestVousdoukas2012(object):
+    def test_reflective(self):
+        model = models.Vousdoukas2012(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(2.14, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Vousdoukas2012(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(0.47, abs=0.01)
+
+
+class TestAtkinson2018(object):
+    def test_reflective(self):
+        model = models.Atkinson2017(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(3.17, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Atkinson2017(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(0.67, abs=0.01)
+
+
+class TestSenechal2011(object):
+    def test_reflective(self):
+        model = models.Senechal2011(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(1.97, abs=0.01)
+        assert model.sig == approx(1.37, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Senechal2011(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(1.97, abs=0.01)
+        assert model.sig == approx(1.37, abs=0.01)

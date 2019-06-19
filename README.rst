@@ -27,13 +27,59 @@ Python Wave Runup
 
 Contents
 ----------
-- `Background`_
 - `Installation`_
+- `Usage`_
 - `Documentation`_
+- `Background`_
 - `Contributing`_
 - `Citation`_
 - `License`_
 - `References`_
+
+
+
+Installation
+------------
+
+Installation of ``py-wave-runup`` can be done with pip:
+
+.. code:: bash
+
+    pip install py-wave-runup
+
+
+Usage
+-----
+
+The following `wave runup models`_ are available for use:
+
+- ``models.Stockdon2006``: The most commonly cited and widely used runup model.
+- ``models.Power2018``: Based on the Gene-Expression Programming technique.
+- ``models.Holman1986``: Incorporated wave setup using Duck, NC measurements.
+- ``models.Nielsen2009``: Based on runup measurements from NSW, Australia.
+- ``models.Ruggiero2001``: Based on runup measurements from dissipative Orgeon beaches.
+- ``models.Vousdoukas2012``: Based on runup from European Atlantic coast
+- ``models.Senechal2011``: Based on extreme storm condition at Truc Vert, France
+
+To get calculate runup, setup and swash, define your offshore conditions in your
+selected runup model then you can access each parameter:
+
+.. code:: python
+
+    from py_wave_runup import models
+
+    model_sto06 = models.Stockdon2006(Hs=4, Tp=12, beta=0.1)
+
+    model_sto06.R2     # 2.54
+    model_sto06.setup  # 0.96
+    model_sto06.sinc   # 2.06
+    model_sto06.sig    # 1.65
+
+.. _wave runup models: https://py-wave-runup.readthedocs.io/en/develop/models.html
+
+Documentation
+-------------
+Documentation is located at https://py-wave-runup.readthedocs.io.
 
 
 Background
@@ -52,6 +98,8 @@ Setup, swash and other components of Total Water Level (TWL) rise are shown in t
 handy figure below.
 
 .. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
+   :width: 500 px
+   :align: center
 ..
 
     | Figure from Vitousek et al. (2017) [#vit17]_
@@ -76,55 +124,24 @@ wave runup models include:
 This python package attempts to consolidate the work done by others in this field and
 collate the numerous empirical relationships for wave runup which have been published.
 
-Installation
-------------
-
-Installation of ``py-wave-runup`` can be done with pip:
-
-.. code:: bash
-
-    pip install py-wave-runup
-
-
-Usage
------
-
-The following `wave runup models`_ are available for use:
-
-- ``models.Stockdon2006``: The most commonly cited and widely used runup model.
-- ``models.Power2018``: Based on the Gene-Expression Programming technique.
-- ``models.Holman1986``: Incorporated wave setup using Duck, NC measurements.
-- ``models.Nielsen2009``: Based on runup measurements from NSW, Australia.
-
-To get calculate runup, setup and swash, define your offshore conditions in your
-selected runup model then you can access each parameter:
-
-.. code:: python
-
-    from py_wave_runup import models
-
-    model_sto06 = models.Stockdon2006(Hs=4, Tp=12, beta=0.1)
-
-    model_sto06.R2     # 2.54
-    model_sto06.setup  # 0.96
-    model_sto06.sinc   # 2.06
-    model_sto06.sig    # 1.65
-
-.. _wave runup models: https://py-wave-runup.readthedocs.io/en/develop/models.html
-
-Documentation
--------------
-Documentation is located at https://py-wave-runup.readthedocs.io.
-
-
 Contributing
 ------------
 
+As there are many different empirical wave models out there, contributions are most
+welcome. If you don't feel confident about changing the code yourself, feel free to open
+a `Github issue`_ and let us know what could be added. Otherwise, follow the steps below
+to create a Pull Request:
+
+.. _Github issue: https://github.com/chrisleaman/py-wave-runup/issues
+
 1. Fork it (https://github.com/chrisleaman/py-wave-runup/fork)
-2. Create your feature branch (``git checkout -b feature/fooBar``)
-3. Commit your changes (``git commit -am 'Add some fooBar``)
-4. Push to the branch (``git push origin feature/fooBar``)
-5. Create a new Pull Request
+2. Create the development environment (``poetry install``)
+3. Create your feature branch (``git checkout -b feature/fooBar``)
+4. Add and run tests (``poetry run pytest``)
+5. Update and check documentation compiles (``poetry run sphinx-build -M html ".\docs" ".\docs\_build"``)
+6. Commit your changes (``git commit -am 'Add some fooBar``)
+7. Push to the branch (``git push origin feature/fooBar``)
+8. Create a new Pull Request
 
 
 Citation

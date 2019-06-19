@@ -425,7 +425,7 @@ class Nielsen2009(RunupModel):
             This relationship was first suggested by Nielsen and Hanslow (1991). The
             definitions for :math:`L_{R}` were then updated by Nielsen (2009),
             where :math:`L_{R} = 0.6 \\tan{\\beta} \\sqrt{H_{rms}L_{s}}` for
-            :math:`\\tan{\\beta} \geq 0.1` and :math:`L_{R} = 0.06\\sqrt{H_{rms}L_{s}}`
+            :math:`\\tan{\\beta} \\geq 0.1` and :math:`L_{R} = 0.06\\sqrt{H_{rms}L_{s}}`
             for :math:`\\tan{\\beta}<0.1`. Note that :math:`Z_{100}` is the highest
             vertical level passed by all swash events in a time period and is usually
             taken as the tide varying water level.
@@ -437,5 +437,146 @@ class Nielsen2009(RunupModel):
         LR[beta_mask] = 0.06 * np.sqrt(self.Hs * self.Lp)
 
         result = 1.98 * LR
+        result = self._return_one_or_array(result)
+        return result
+
+
+class Ruggiero2001(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Ruggiero, P., Komar, P.D., McDougal, W.G., Marra, J.J., Beach, R.A., 2001. Wave
+        Runup, Extreme Water Levels and the Erosion of Properties Backing Beaches. Journal
+        of Coastal Research 17, 407–419.
+
+    Examples:
+        Calculates 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Ruggiero2001
+        >>> rug01 = Ruggiero2001(Hs=4, Tp=11, beta=0.1)
+        >>> rug01.R2
+        2.35
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math:: R_{2} = 0.27 \\sqrt{\\beta H_{s} L_{p}}
+        """
+
+        result = 0.27 * np.sqrt(self.beta * self.Hs * self.Lp)
+        result = self._return_one_or_array(result)
+        return result
+
+
+class Vousdoukas2012(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Vousdoukas, M.I., Wziatek, D., Almeida, L.P., 2012. Coastal vulnerability assessment
+        based on video wave run-up observations at a mesotidal, steep-sloped beach. Ocean
+        Dynamics 62, 123–137. https://doi.org/10.1007/s10236-011-0480-x
+
+    Examples:
+        Calculates 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1.
+
+        >>> from py_wave_runup.models import Vousdoukas2012
+        >>> vou12 = Vousdoukas2012(Hs=4, Tp=11, beta=0.1)
+        >>> vou12.R2
+        2.14
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math: R_{2} = 0.53 \\beta \\sqrt{H_{s}L_{p}} + 0.58 \\tan{\\beta}\\beta H_{s} + 0.45
+        """
+
+        result = (
+            0.53 * self.beta * np.sqrt(self.Hs * self.Lp)
+            + 0.58 * np.tan(self.beta) * self.Hs
+            + 0.45
+        )
+        resul = self._return_one_or_array(result)
+        return result
+
+
+class Atkinson2017(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Atkinson, A.L., Power, H.E., Moura, T., Hammond, T., Callaghan, D.P., Baldock, T.E.,
+        2017. Assessment of runup predictions by empirical models on non-truncated beaches
+        on the south-east Australian coast. Coastal Engineering 119, 15–31.
+        https://doi.org/10.1016/j.coastaleng.2016.10.001
+
+    Examples:
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1
+
+        >>> from py_wave_runup.models import Atkinson2017
+        >>> atk17 = Atkinson2017(Hs=4, Tp=11, beta=0.1)
+        >>> atk17.R2
+        3.17
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math: R_{2} = 0.92 \\tan{\\beta} \\sqrt{H_{s} L_{p}} + 0.16 H_{s}
+        """
+
+        result = 0.92 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp) + 0.16 * self.Hs
+        result = self._return_one_or_array(result)
+        return result
+
+
+class Senechal2011(RunupModel):
+    """
+    This class implements the empirical wave runup model from:
+
+        Senechal, N., Coco, G., Bryan, K.R., Holman, R.A., 2011. Wave runup during extreme
+        storm conditions. Journal of Geophysical Research 116.
+        https://doi.org/10.1029/2010JC006819
+
+     Examples:
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1
+
+        >>> from py_wave_runup.models import Senechal2011
+        >>> sen11 = Senechal2011(Hs=4, Tp=11, beta=0.1)
+        >>> sen11.R2
+        1.97
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level, given by:
+
+                .. math:: R_{2} = 2.14 \\times \\tanh{0.4 H_{s}}
+        """
+
+        result = 2.14 * np.tanh(0.4 * self.Hs)
+        result = self._return_one_or_array(result)
+        return result
+
+    @property
+    def sig(self):
+        """
+        Returns:
+            Infragravity componennt of swash:
+
+                .. math: S_{ig} = 0.05 * (H_{s} L_{p})^{0.5}
+        """
+        result = 0.05 * np.sqrt(self.Hs * self.Lp)
         result = self._return_one_or_array(result)
         return result
