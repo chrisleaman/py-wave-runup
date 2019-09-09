@@ -466,17 +466,20 @@ description = "tox is a generic virtualenv management and test command line tool
 name = "tox"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "3.13.2"
+version = "3.14.0"
 
 [package.dependencies]
 filelock = ">=3.0.0,<4"
-importlib-metadata = ">=0.12,<1"
 packaging = ">=14"
 pluggy = ">=0.12.0,<1"
 py = ">=1.4.17,<2"
 six = ">=1.0.0,<2"
 toml = ">=0.9.4"
 virtualenv = ">=14.0.0"
+
+[package.dependencies.importlib-metadata]
+python = "<3.8"
+version = ">=0.12,<1"
 
 [[package]]
 category = "dev"
@@ -511,7 +514,7 @@ python-versions = ">=2.7"
 version = "0.5.1"
 
 [metadata]
-content-hash = "f3ce60c0a569eaef257f876f4f6d452fc8ce27ad180e265e42cb4a11ac2f0dd8"
+content-hash = "9851973fd6263de8b9144682602e90339a63583a21c20861f8019862738100bb"
 python-versions = "^3.5 || ^3.6 || ^3.7"
 
 [metadata.hashes]
@@ -561,7 +564,7 @@ sphinxcontrib-jsmath = ["2ec2eaebfb78f3f2078e73666b1415417a116cc848b72e5172e596c
 sphinxcontrib-qthelp = ["513049b93031beb1f57d4daea74068a4feb77aa5630f856fcff2e50de14e9a20", "79465ce11ae5694ff165becda529a600c754f4bc459778778c7017374d4d406f"]
 sphinxcontrib-serializinghtml = ["c0efb33f8052c04fd7a26c0a07f1678e8512e0faec19f4aa8f2473a8b81d5227", "db6615af393650bf1151a6cd39120c29abaf93cc60db8c48eb2dddbfdc3a9768"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
-tox = ["dab0b0160dd187b654fc33d690ee1d7bf328bd5b8dc6ef3bb3cc468969c659ba", "ee35ffce74933a6c6ac10c9a0182e41763140a5a5070e21b114feca56eaccdcd"]
+tox = ["0bc216b6a2e6afe764476b4a07edf2c1dab99ed82bb146a1130b2e828f5bff5e", "c4f6b319c20ba4913dbfe71ebfd14ff95d1853c4231493608182f66e566ecfe1"]
 urllib3 = ["2393a695cd12afedd0dcb26fe5d50d0cf248e5a66f75dbd89a3d4eb333a61af4", "a637e5fae88995b256e3409dc4d52c2e2e0ba32c42a6365fee8bbd2238de3cfb"]
 virtualenv = ["15ee248d13e4001a691d9583948ad3947bcb8a289775102e4c4aa98a8b7a6d73", "bfc98bb9b42a3029ee41b96dc00a34c2f254cbf7716bec824477b2c82741a5c4"]
 wcwidth = ["3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e", "f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"]
