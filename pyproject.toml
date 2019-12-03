@@ -10,8 +10,9 @@ homepage = 'https://github.com/chrisleaman/py-wave-runup'
 documentation = 'https://py-wave-runup.readthedocs.io'
 
 [tool.poetry.dependencies]
-python = "^3.5 || ^3.6 || ^3.7"
+python = "^3.6 || ^3.7"
 numpy = "^1.16"
+black = {version = "^18.3-alpha.0", allows-prereleases = true}
 
 [tool.poetry.dev-dependencies]
 tox = "^3.12"
