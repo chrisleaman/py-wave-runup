@@ -20,6 +20,7 @@ pyyaml = "*"
 [[package]]
 category = "dev"
 description = "Atomic file writes."
+marker = "sys_platform == \"win32\""
 name = "atomicwrites"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -291,7 +292,7 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=3.5"
-version = "5.1.2"
+version = "5.3.1"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
@@ -511,7 +512,7 @@ python-versions = ">=2.7"
 version = "0.5.1"
 
 [metadata]
-content-hash = "4afe0a4c68a293b5f680316d23eb8030baf749d52f8cafdd03a429ac1db64092"
+content-hash = "152d42a9d367f7ff5448d17a0ce5c46c9893eb23fec986497136a5d71f92d517"
 python-versions = "^3.5 || ^3.6 || ^3.7"
 
 [metadata.hashes]
@@ -545,7 +546,7 @@ pre-commit = ["1d3c0587bda7c4e537a46c27f2c84aa006acc18facf9970bf947df596ce91f3f"
 py = ["64f65755aee5b381cea27766a3a147c3f15b9b6b9ac88676de66ba2ae36793fa", "dc639b046a6e2cff5bbe40194ad65936d6ba360b52b3c3fe1d08a82dd50b5e53"]
 pygments = ["5ffada19f6203563680669ee7f53b64dabbeb100eb51b61996085e99c03b284a", "e8218dd399a61674745138520d0d4cf2621d7e032439341bc3f647bff125818d"]
 pyparsing = ["1873c03321fc118f4e9746baf201ff990ceb915f433f23b395f5580d1840cb2a", "9b6323ef4ab914af344ba97510e966d64ba91055d6b9afa6b30799340e89cc03"]
-pytest = ["95d13143cc14174ca1a01ec68e84d76ba5d9d493ac02716fd9706c949a505210", "b78fe2881323bd44fd9bd76e5317173d4316577e7b1cddebae9136a4495ec865"]
+pytest = ["63344a2e3bce2e4d522fd62b4fdebb647c019f1f9e4ca075debbd13219db4418", "f67403f33b2b1d25a6756184077394167fe5e2f9d8bdaab30707d19ccec35427"]
 pytest-cov = ["cc6742d8bac45070217169f5f72ceee1e0e55b0221f54bcf24845972d3a47f2b", "cdbdef4f870408ebdbfeb44e63e07eb18bb4619fae852f6e760645fa36172626"]
 pytest-runner = ["25a013c8d84f0ca60bb01bd11913a3bcab420f601f0f236de4423074af656e7a", "d04243fbf29a3b574f18f1bcff2a07f505db5daede82f706f2e32728f77d3f4d"]
 pytz = ["303879e36b721603cc54604edcac9d20401bdbe31e1e4fdee5b9f98d5d31dfda", "d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141"]
