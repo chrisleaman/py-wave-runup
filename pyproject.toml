@@ -16,7 +16,7 @@ black = {version = ">=18.3,<20.0", allows-prereleases = true}
 
 [tool.poetry.dev-dependencies]
 tox = "^3.13"
-coverage = "^4.5"
+coverage = "^5.0"
 pytest-runner = "^5.1"
 pytest = "^5.3"
 pre-commit = "^1.18"
