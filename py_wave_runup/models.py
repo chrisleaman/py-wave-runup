@@ -434,7 +434,7 @@ class Nielsen2009(RunupModel):
         # Two different definitions of LR dependant on slope:
         beta_mask = np.tan(self.beta) < 0.1
         LR = 0.6 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp)
-        LR[beta_mask] = 0.06 * np.sqrt(self.Hs * self.Lp)
+        LR[beta_mask] = 0.06 * np.sqrt(self.Hs[beta_mask] * self.Lp[beta_mask])
 
         result = 1.98 * LR
         result = self._return_one_or_array(result)
