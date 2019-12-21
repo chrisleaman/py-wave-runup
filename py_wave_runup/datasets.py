@@ -15,17 +15,17 @@ def load_power18():
         Examples:
             >>> from py_wave_runup import datasets
             >>> df = datasets.load_power18()
-            >>> df.head()
-                        dataset      beach    case lab_field  ...   beta       d50  roughness     r2
-                0  ATKINSON2017  AUSTINMER  AU24-1         F  ...  0.102  0.000445   0.001112  1.979
-                1  ATKINSON2017  AUSTINMER  AU24-2         F  ...  0.101  0.000445   0.001112  1.862
-                2  ATKINSON2017  AUSTINMER  AU24-3         F  ...  0.115  0.000445   0.001112  1.695
-                3  ATKINSON2017  AUSTINMER  AU24-4         F  ...  0.115  0.000445   0.001112  1.604
-                4  ATKINSON2017  AUSTINMER  AU24-5         F  ...  0.115  0.000445   0.001112  1.515
-                [5 rows x 10 columns]
-            >>> df.columns
-            Index(['dataset', 'beach', 'case', 'lab_field', 'hs', 'tp', 'beta', 'd50',
-                   'roughness', 'r2'],dtype='object')
+            >>> df.describe()
+                            hs           tp         beta    roughness           r2
+            count  1390.000000  1390.000000  1390.000000  1390.000000  1390.000000
+            mean      1.893131     9.227035     0.120612     0.024779     2.318814
+            std       1.309243     3.589004     0.062236     0.043617     1.776918
+            min       0.018576     0.805805     0.009000     0.000003     0.027336
+            25%       0.895942     7.517556     0.088228     0.001000     1.103500
+            50%       1.848050     9.963089     0.108422     0.003750     1.923500
+            75%       2.391756    10.995500     0.129220     0.007500     3.406660
+            max       7.174100    23.680333     0.286551     0.125000    12.669592
+
     """
 
     # To load a resource in a package, need to use pkgutil.

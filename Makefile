@@ -9,7 +9,7 @@ update-requirements:
 	poetry run pip freeze --exclude-editable > ./docs/requirements.txt
 
 test:
-	poetry run pytest --cov=py_wave_runup --cov-report term-missing  -W ignore::DeprecationWarning
+	poetry run pytest
 
 docs:
 	poetry run sphinx-build -M html ".\docs" ".\docs\_build"

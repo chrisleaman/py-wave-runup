@@ -101,11 +101,11 @@ class Stockdon2006(RunupModel):
         >>> from py_wave_runup.models import Stockdon2006
         >>> sto06 = Stockdon2006(Hs=4, Tp=11, beta=0.1)
         >>> sto06.R2
-        2.54
+        2.5420364539745717
         >>> sto06.setup
-        0.96
+        0.9621334076403345
         >>> sto06.swash
-        2.64
+        2.6402827466167222
     """
 
     doi = "10.1016/j.coastaleng.2005.12.005"
@@ -207,7 +207,7 @@ class Power2018(RunupModel):
         >>> from py_wave_runup.models import Power2018
         >>> pow18 = Power2018(Hs=1, Tp=8, beta=0.07, r=0.00075)
         >>> pow18.R2
-        1.12
+        1.121845349302836
     """
 
     doi = "10.1016/j.coastaleng.2018.10.006"
@@ -367,7 +367,7 @@ class Holman1986(RunupModel):
         >>> from py_wave_runup.models import Holman1986
         >>> hol86 = Holman1986(Hs=4, Tp=11, beta=0.1)
         >>> hol86.R2
-        3.09
+        3.089266633290902
         >>> hol86.setup
         0.8
     """
@@ -411,7 +411,7 @@ class Nielsen2009(RunupModel):
         >>> from py_wave_runup.models import Nielsen2009
         >>> niel09 = Nielsen2009(Hs=4, Tp=11, beta=0.1)
         >>> niel09.R2
-        3.27
+        3.276685253433243
     """
 
     @property
@@ -455,7 +455,7 @@ class Ruggiero2001(RunupModel):
         >>> from py_wave_runup.models import Ruggiero2001
         >>> rug01 = Ruggiero2001(Hs=4, Tp=11, beta=0.1)
         >>> rug01.R2
-        2.35
+        2.3470968711209452
     """
 
     @property
@@ -486,7 +486,7 @@ class Vousdoukas2012(RunupModel):
         >>> from py_wave_runup.models import Vousdoukas2012
         >>> vou12 = Vousdoukas2012(Hs=4, Tp=11, beta=0.1)
         >>> vou12.R2
-        2.14
+        2.1397213136650377
     """
 
     @property
@@ -503,7 +503,7 @@ class Vousdoukas2012(RunupModel):
             + 0.58 * np.tan(self.beta) * self.Hs
             + 0.45
         )
-        resul = self._return_one_or_array(result)
+        result = self._return_one_or_array(result)
         return result
 
 
@@ -522,7 +522,7 @@ class Atkinson2017(RunupModel):
         >>> from py_wave_runup.models import Atkinson2017
         >>> atk17 = Atkinson2017(Hs=4, Tp=11, beta=0.1)
         >>> atk17.R2
-        3.17
+        3.177500364611603
     """
 
     @property
@@ -553,7 +553,7 @@ class Senechal2011(RunupModel):
         >>> from py_wave_runup.models import Senechal2011
         >>> sen11 = Senechal2011(Hs=4, Tp=11, beta=0.1)
         >>> sen11.R2
-        1.97
+        1.9723707064298488
     """
 
     @property
