@@ -38,6 +38,6 @@ Contents
    installation
    usage
    models
-
-..
+   datasets
+   auto_examples/index
 

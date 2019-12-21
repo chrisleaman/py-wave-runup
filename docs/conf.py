@@ -35,6 +35,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
+    "sphinx_gallery.gen_gallery",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,6 +48,12 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The master toctree document.
 master_doc = "index"
+
+sphinx_gallery_conf = {
+    "examples_dirs": "../examples",  # path to your example scripts
+    "gallery_dirs": "auto_examples",  # path to where to save gallery generated output
+    "download_all_examples": False,
+}
 
 source_suffix = ".rst"
 autoclass_content = "both"
@@ -65,10 +72,6 @@ html_theme = "alabaster"
 html_static_path = ["_static"]
 
 pygments_style = "sphinx"
-
-html_sidebars = {
-    "**": ["globaltoc.html", "relations.html", "sourcelink.html", "searchbox.html"]
-}
 
 html_sidebars = {
     "**": ["about.html", "navigation.html", "relations.html", "searchbox.html"]
