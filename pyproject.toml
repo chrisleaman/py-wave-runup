@@ -12,6 +12,7 @@ documentation = 'https://py-wave-runup.readthedocs.io'
 [tool.poetry.dependencies]
 python = "^3.6 || ^3.7"
 numpy = "^1.16"
+pandas = "^0.25.3"
 
 [tool.poetry.dev-dependencies]
 tox = "^3.13"
