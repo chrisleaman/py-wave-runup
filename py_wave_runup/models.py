@@ -1,3 +1,9 @@
+"""
+This module implements different published wave runup empirical models. Each class
+implements a different published model which can be used to estimate wave runup,
+typically based on Hs, Tp, and beta.
+"""
+
 from abc import ABCMeta, abstractmethod
 
 import numpy as np

@@ -1,3 +1,9 @@
+"""
+This module is an interface for loading existing wave runup datasets. These datasets
+can be used to evaluate existing models or train new models. Datasets are returned as
+pandas dataframes.
+"""
+
 import pandas as pd
 import io
 import pkgutil
