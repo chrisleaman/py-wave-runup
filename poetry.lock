@@ -766,8 +766,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "daddeb7b6e9f93576b52b9c7f1dd832fe201450269ad97c5b1d39bde526d5a85"
-python-versions = "^3.6 || ^3.7"
+content-hash = "eda0935c71acea2fd861331cb956509d3a0d3a404ad3acf23acdb9b2273dfdfb"
+python-versions = "^3.6 || ^3.7 || ^3.8"
 
 [metadata.files]
 alabaster = [

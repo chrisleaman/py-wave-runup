@@ -10,7 +10,7 @@ homepage = 'https://github.com/chrisleaman/py-wave-runup'
 documentation = 'https://py-wave-runup.readthedocs.io'
 
 [tool.poetry.dependencies]
-python = "^3.6 || ^3.7"
+python = "^3.6 || ^3.7 || ^3.8"
 numpy = "^1.16"
 pandas = "^0.25.3"
 
