@@ -16,7 +16,7 @@ class RunupModel(metaclass=ABCMeta):
 
     doi = None
 
-    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None):
+    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
         """
         Args:
             Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
@@ -29,12 +29,15 @@ class RunupModel(metaclass=ABCMeta):
                 Must be defined if :attr:`Lp` is not defined.
             Lp (:obj:`float` or :obj:`list`): Peak wave length
                 Must be definied if :attr:`Tp` is not defined.
+            r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
+                approximated by :math:`r=2.5D_{50}`.
         """
 
         self.Hs = Hs
         self.Tp = Tp
         self.beta = beta
         self.Lp = Lp
+        self.r = r
 
         # Ensure wave length or peak period is specified
         if all(v is None for v in [Lp, Tp]):
@@ -42,8 +45,9 @@ class RunupModel(metaclass=ABCMeta):
 
         # Ensure input is atleast 1d numpy array, this is so we can handle lists,
         # arrays and floats.
-        self.Hs = np.atleast_1d(Hs)
-        self.beta = np.atleast_1d(beta)
+        self.Hs = np.atleast_1d(Hs).astype(np.float)
+        self.beta = np.atleast_1d(beta).astype(np.float)
+        self.r = np.atleast_1d(r).astype(np.float)
 
         # Calculate wave length if it hasn't been specified.
         if not Lp:
@@ -217,31 +221,6 @@ class Power2018(RunupModel):
     """
 
     doi = "10.1016/j.coastaleng.2018.10.006"
-
-    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
-        """
-        Args:
-            Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
-                account for energy dissipation in the nearshore, transform the wave to
-                the nearshore, then reverse-shoal to deep water.
-            beta (:obj:`float` or :obj:`list`): Beach slope. Typically defined as the
-                slope between the region of :math:`\\pm2\\sigma` where :math:`\\sigma`
-                is the standard deviation of the continuous water level record.
-            Tp (:obj:`float` or :obj:`list`): Peak wave period.
-                Must be defined if :attr:`Lp` is not defined.
-            Lp (:obj:`float` or :obj:`list`): Peak wave length
-                Must be definied if :attr:`Tp` is not defined.
-            r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
-                approximated by :math:`r=2.5D_{50}`.
-        """
-
-        RunupModel.__init__(self, Hs, Tp, beta, Lp)
-
-        self.r = np.atleast_1d(r)
-
-        # Ensure hydraulic roughness is specified
-        if r is None:
-            raise ValueError("Expected either hydraulic roughness, r, arg")
 
     @property
     def R2(self):
