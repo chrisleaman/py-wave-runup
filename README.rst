@@ -135,13 +135,19 @@ to create a Pull Request:
 .. _Github issue: https://github.com/chrisleaman/py-wave-runup/issues
 
 1. Fork it (https://github.com/chrisleaman/py-wave-runup/fork)
-2. Create the development environment (``poetry install``)
+2. Create the development environment:
+    - For pip, run ``pip install -r requirements.txt``
+    - For `poetry`_, run ``poetry install``
+    - For `anaconda`_, run ``conda create --name <env_name> --file requirements.txt``
 3. Create your feature branch (``git checkout -b feature/fooBar``)
-4. Add and run tests (``poetry run pytest``)
-5. Update and check documentation compiles (``poetry run sphinx-build -M html ".\docs" ".\docs\_build"``)
+4. Add and run tests (``pytest``)
+5. Update and check documentation compiles (``sphinx-build -M html ".\docs" ".\docs\_build"``)
 6. Commit your changes (``git commit -am 'Add some fooBar``)
 7. Push to the branch (``git push origin feature/fooBar``)
 8. Create a new Pull Request
+
+.. _poetry: https://python-poetry.org/
+.. _anaconda: https://www.anaconda.com/distribution/#download-section
 
 
 Citation
