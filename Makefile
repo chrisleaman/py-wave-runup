@@ -5,8 +5,7 @@ install-requirements:
 
 # Requirements.txt needed to build docs on readthedocs.io
 update-requirements:
-	poetery update
-	poetry run pip freeze --exclude-editable > ./docs/requirements.txt
+	poetry update
 
 test:
 	poetry run pytest
