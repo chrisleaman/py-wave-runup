@@ -23,9 +23,9 @@ class EnsembleRaw:
                 slope between the region of :math:`\\pm2\\sigma` where :math:`\\sigma`
                 is the standard deviation of the continuous water level record.
             Tp (:obj:`float` or :obj:`list`): Peak wave period.
-                Must be defined if :attr:`Lp` is not defined.
+                Must be defined if ``Lp`` is not defined.
             Lp (:obj:`float` or :obj:`list`): Peak wave length
-                Must be definied if :attr:`Tp` is not defined.
+                Must be definied if ``Tp`` is not defined.
             r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
                 approximated by :math:`r=2.5D_{50}`.
         """

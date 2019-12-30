@@ -37,6 +37,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx_gallery.gen_gallery",
     "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,6 +60,9 @@ sphinx_gallery_conf = {
 source_suffix = ".rst"
 autoclass_content = "both"
 
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+}
 
 # -- Options for HTML output -------------------------------------------------
 
