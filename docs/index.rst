@@ -38,6 +38,7 @@ Contents
    installation
    usage
    models
-
-..
+   ensembles
+   datasets
+   auto_examples/index
 

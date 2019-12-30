@@ -1,5 +1,6 @@
 from py_wave_runup import models
 from pytest import raises, approx
+import numpy as np
 
 
 class TestStockdon2006(object):
@@ -60,8 +61,8 @@ class TestPower2018(object):
         assert model.R2 == approx((0.922, 2.88), abs=0.1)
 
     def test_no_roughness(self):
-        with raises(ValueError):
-            model = models.Power2018(Hs=4, Tp=11, beta=0.1)
+        model = models.Power2018(Hs=4, Tp=11, beta=0.1)
+        assert np.isnan(model.R2)
 
 
 class TestHolman1986(object):

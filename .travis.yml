@@ -3,12 +3,14 @@
 language: python
 dist: "xenial"
 python:
+  - 3.8
   - 3.7
   - 3.6
 
 stages:
   - lint
   - test
+  - docs
   - name: deploy
     if: tag IS present
 
@@ -29,6 +31,14 @@ jobs:
         - pre-commit install-hooks
       script:
         - pre-commit run --all-files
+    - stage: docs
+      python: 3.7
+      install:
+        - pip install poetry
+        - poetry install -v
+      script:
+        - echo $PWD
+        - sphinx-build -nWT -vvv -b dummy ./docs ./docs/_build
     - stage: deploy
       script:
         - echo Deploying to PyPI...

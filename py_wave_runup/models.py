@@ -1,3 +1,9 @@
+"""
+This module implements different published wave runup empirical models. Each class
+implements a different published model which can be used to estimate wave runup,
+typically based on Hs, Tp, and beta.
+"""
+
 from abc import ABCMeta, abstractmethod
 
 import numpy as np
@@ -10,7 +16,7 @@ class RunupModel(metaclass=ABCMeta):
 
     doi = None
 
-    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None):
+    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
         """
         Args:
             Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
@@ -20,15 +26,18 @@ class RunupModel(metaclass=ABCMeta):
                 slope between the region of :math:`\\pm2\\sigma` where :math:`\\sigma`
                 is the standard deviation of the continuous water level record.
             Tp (:obj:`float` or :obj:`list`): Peak wave period.
-                Must be defined if :attr:`Lp` is not defined.
+                Must be defined if ``Lp`` is not defined.
             Lp (:obj:`float` or :obj:`list`): Peak wave length
-                Must be definied if :attr:`Tp` is not defined.
+                Must be definied if ``Tp`` is not defined.
+            r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
+                approximated by :math:`r=2.5D_{50}`.
         """
 
         self.Hs = Hs
         self.Tp = Tp
         self.beta = beta
         self.Lp = Lp
+        self.r = r
 
         # Ensure wave length or peak period is specified
         if all(v is None for v in [Lp, Tp]):
@@ -36,8 +45,9 @@ class RunupModel(metaclass=ABCMeta):
 
         # Ensure input is atleast 1d numpy array, this is so we can handle lists,
         # arrays and floats.
-        self.Hs = np.atleast_1d(Hs)
-        self.beta = np.atleast_1d(beta)
+        self.Hs = np.atleast_1d(Hs).astype(np.float)
+        self.beta = np.atleast_1d(beta).astype(np.float)
+        self.r = np.atleast_1d(r).astype(np.float)
 
         # Calculate wave length if it hasn't been specified.
         if not Lp:
@@ -101,11 +111,11 @@ class Stockdon2006(RunupModel):
         >>> from py_wave_runup.models import Stockdon2006
         >>> sto06 = Stockdon2006(Hs=4, Tp=11, beta=0.1)
         >>> sto06.R2
-        2.54
+        2.5420364539745717
         >>> sto06.setup
-        0.96
+        0.9621334076403345
         >>> sto06.swash
-        2.64
+        2.6402827466167222
     """
 
     doi = "10.1016/j.coastaleng.2005.12.005"
@@ -207,35 +217,10 @@ class Power2018(RunupModel):
         >>> from py_wave_runup.models import Power2018
         >>> pow18 = Power2018(Hs=1, Tp=8, beta=0.07, r=0.00075)
         >>> pow18.R2
-        1.12
+        1.121845349302836
     """
 
     doi = "10.1016/j.coastaleng.2018.10.006"
-
-    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
-        """
-        Args:
-            Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
-                account for energy dissipation in the nearshore, transform the wave to
-                the nearshore, then reverse-shoal to deep water.
-            beta (:obj:`float` or :obj:`list`): Beach slope. Typically defined as the
-                slope between the region of :math:`\\pm2\\sigma` where :math:`\\sigma`
-                is the standard deviation of the continuous water level record.
-            Tp (:obj:`float` or :obj:`list`): Peak wave period.
-                Must be defined if :attr:`Lp` is not defined.
-            Lp (:obj:`float` or :obj:`list`): Peak wave length
-                Must be definied if :attr:`Tp` is not defined.
-            r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
-                approximated by :math:`r=2.5D_{50}`.
-        """
-
-        RunupModel.__init__(self, Hs, Tp, beta, Lp)
-
-        self.r = np.atleast_1d(r)
-
-        # Ensure hydraulic roughness is specified
-        if r is None:
-            raise ValueError("Expected either hydraulic roughness, r, arg")
 
     @property
     def R2(self):
@@ -367,7 +352,7 @@ class Holman1986(RunupModel):
         >>> from py_wave_runup.models import Holman1986
         >>> hol86 = Holman1986(Hs=4, Tp=11, beta=0.1)
         >>> hol86.R2
-        3.09
+        3.089266633290902
         >>> hol86.setup
         0.8
     """
@@ -411,7 +396,7 @@ class Nielsen2009(RunupModel):
         >>> from py_wave_runup.models import Nielsen2009
         >>> niel09 = Nielsen2009(Hs=4, Tp=11, beta=0.1)
         >>> niel09.R2
-        3.27
+        3.276685253433243
     """
 
     @property
@@ -434,7 +419,7 @@ class Nielsen2009(RunupModel):
         # Two different definitions of LR dependant on slope:
         beta_mask = np.tan(self.beta) < 0.1
         LR = 0.6 * np.tan(self.beta) * np.sqrt(self.Hs * self.Lp)
-        LR[beta_mask] = 0.06 * np.sqrt(self.Hs * self.Lp)
+        LR[beta_mask] = 0.06 * np.sqrt(self.Hs[beta_mask] * self.Lp[beta_mask])
 
         result = 1.98 * LR
         result = self._return_one_or_array(result)
@@ -455,7 +440,7 @@ class Ruggiero2001(RunupModel):
         >>> from py_wave_runup.models import Ruggiero2001
         >>> rug01 = Ruggiero2001(Hs=4, Tp=11, beta=0.1)
         >>> rug01.R2
-        2.35
+        2.3470968711209452
     """
 
     @property
@@ -486,7 +471,7 @@ class Vousdoukas2012(RunupModel):
         >>> from py_wave_runup.models import Vousdoukas2012
         >>> vou12 = Vousdoukas2012(Hs=4, Tp=11, beta=0.1)
         >>> vou12.R2
-        2.14
+        2.1397213136650377
     """
 
     @property
@@ -503,7 +488,7 @@ class Vousdoukas2012(RunupModel):
             + 0.58 * np.tan(self.beta) * self.Hs
             + 0.45
         )
-        resul = self._return_one_or_array(result)
+        result = self._return_one_or_array(result)
         return result
 
 
@@ -522,7 +507,7 @@ class Atkinson2017(RunupModel):
         >>> from py_wave_runup.models import Atkinson2017
         >>> atk17 = Atkinson2017(Hs=4, Tp=11, beta=0.1)
         >>> atk17.R2
-        3.17
+        3.177500364611603
     """
 
     @property
@@ -553,7 +538,7 @@ class Senechal2011(RunupModel):
         >>> from py_wave_runup.models import Senechal2011
         >>> sen11 = Senechal2011(Hs=4, Tp=11, beta=0.1)
         >>> sen11.R2
-        1.97
+        1.9723707064298488
     """
 
     @property

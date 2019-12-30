@@ -1,0 +1,13 @@
+black
+codecov
+coverage
+numpy
+pandas
+pre-commit
+pytest
+pytest-cov
+pytest-runner
+scikit-learn
+sphinx
+sphinx-gallery
+tox

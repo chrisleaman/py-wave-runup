@@ -23,7 +23,7 @@ copyright = "2019, Chris Leaman"
 author = "Chris Leaman"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.6"
+release = "v0.1.7"
 
 
 # -- General configuration ---------------------------------------------------
@@ -35,6 +35,9 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
+    "sphinx_gallery.gen_gallery",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -48,9 +51,18 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The master toctree document.
 master_doc = "index"
 
+sphinx_gallery_conf = {
+    "examples_dirs": "../examples",  # path to your example scripts
+    "gallery_dirs": "auto_examples",  # path to where to save gallery generated output
+    "download_all_examples": False,
+}
+
 source_suffix = ".rst"
 autoclass_content = "both"
 
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+}
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -65,10 +77,6 @@ html_theme = "alabaster"
 html_static_path = ["_static"]
 
 pygments_style = "sphinx"
-
-html_sidebars = {
-    "**": ["globaltoc.html", "relations.html", "sourcelink.html", "searchbox.html"]
-}
 
 html_sidebars = {
     "**": ["about.html", "navigation.html", "relations.html", "searchbox.html"]

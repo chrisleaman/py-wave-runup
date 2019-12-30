@@ -5,11 +5,10 @@ install-requirements:
 
 # Requirements.txt needed to build docs on readthedocs.io
 update-requirements:
-	poetery update
-	poetry run pip freeze --exclude-editable > ./docs/requirements.txt
+	poetry update
 
 test:
-	poetry run pytest --cov=py_wave_runup --cov-report term-missing  -W ignore::DeprecationWarning
+	poetry run pytest
 
 docs:
 	poetry run sphinx-build -M html ".\docs" ".\docs\_build"
