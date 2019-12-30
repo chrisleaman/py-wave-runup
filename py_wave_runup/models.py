@@ -97,8 +97,7 @@ class RunupModel(metaclass=ABCMeta):
 
 class Stockdon2006(RunupModel):
     """
-
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Stockdon et al (2006)
 
         Stockdon, H. F., Holman, R. A., Howd, P. A., & Sallenger, A. H. (2006).
         Empirical  parameterization of setup, swash, and runup. Coastal Engineering,
@@ -204,7 +203,7 @@ class Stockdon2006(RunupModel):
 
 class Power2018(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Power et al (2018)
 
         Power, H.E., Gharabaghi, B., Bonakdari, H., Robertson, B., Atkinson, A.L.,
         Baldock, T.E., 2018. Prediction of wave runup on beaches using
@@ -339,7 +338,7 @@ class Power2018(RunupModel):
 
 class Holman1986(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Holman (1986)
 
         Holman, R.A., 1986. Extreme value statistics for wave run-up on a natural
         beach. Coastal Engineering 9, 527–544. https://doi.org/10.1016/0378-3839(
@@ -386,7 +385,7 @@ class Holman1986(RunupModel):
 
 class Nielsen2009(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Nielsen (2009)
 
         P. Nielsen, Coastal and Estuarine Processes, Singapore, World Scientiﬁc, 2009.
 
@@ -428,7 +427,7 @@ class Nielsen2009(RunupModel):
 
 class Ruggiero2001(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Ruggiero et al (2001)
 
         Ruggiero, P., Komar, P.D., McDougal, W.G., Marra, J.J., Beach, R.A., 2001. Wave
         Runup, Extreme Water Levels and the Erosion of Properties Backing Beaches. Journal
@@ -459,7 +458,7 @@ class Ruggiero2001(RunupModel):
 
 class Vousdoukas2012(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Vousdoukas et al (2012)
 
         Vousdoukas, M.I., Wziatek, D., Almeida, L.P., 2012. Coastal vulnerability assessment
         based on video wave run-up observations at a mesotidal, steep-sloped beach. Ocean
@@ -494,7 +493,7 @@ class Vousdoukas2012(RunupModel):
 
 class Atkinson2017(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Atkinson et al (2017)
 
         Atkinson, A.L., Power, H.E., Moura, T., Hammond, T., Callaghan, D.P., Baldock, T.E.,
         2017. Assessment of runup predictions by empirical models on non-truncated beaches
@@ -526,7 +525,7 @@ class Atkinson2017(RunupModel):
 
 class Senechal2011(RunupModel):
     """
-    This class implements the empirical wave runup model from:
+    Implements the runup model from Senechal et al (2011)
 
         Senechal, N., Coco, G., Bryan, K.R., Holman, R.A., 2011. Wave runup during extreme
         storm conditions. Journal of Geophysical Research 116.

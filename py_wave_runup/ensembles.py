@@ -10,6 +10,8 @@ from py_wave_runup import models
 
 class EnsembleRaw:
     """
+    Returns predicitons from each wave runup model
+
     This class runs predictions on all available runup models and returns the results
     from each model, i.e. no combining or ensembling is performed. It is provided as
     a base class for other ensemble models to inherit, they will need access to all
@@ -103,6 +105,10 @@ class EnsembleRaw:
 
 
 class EnsembleMean(EnsembleRaw):
+    """
+    Returns the mean parameter given by all the runup models.
+    """
+
     def estimate(self, param):
         """
         Returns:

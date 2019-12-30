@@ -60,6 +60,11 @@ sphinx_gallery_conf = {
 source_suffix = ".rst"
 autoclass_content = "both"
 
+autodoc_default_options = {
+    "members": True,
+}
+autosummary_generate = True
+
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "pandas": (

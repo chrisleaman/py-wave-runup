@@ -27,3 +27,6 @@ using the model.
     model_sto06.setup  # 0.96
     model_sto06.sinc   # 2.06
     model_sto06.sig    # 1.65
+
+.. tip::
+   You can find more usage examples :doc:`here<auto_examples/index>`.

@@ -19,6 +19,8 @@ from py_wave_runup.utils import PerlinNoise
 
 def load_power18():
     """
+        Loads wave runup data included with Power et al (2018)
+
         This function loads the supplementary data from:
 
             Power, H.E., Gharabaghi, B., Bonakdari, H., Robertson, B., Atkinson, A.L.,
@@ -67,7 +69,7 @@ def load_power18():
     return df
 
 
-def generate_random_stockdon_ts(
+def load_random_sto06(
     seed=12345,
     t_start=datetime(2000, 1, 1),
     t_end=datetime(2000, 1, 2),
@@ -77,14 +79,34 @@ def generate_random_stockdon_ts(
     beta_range=(0.08, 0.1),
     noise_std=0.3,
 ):
+
     """
-    Generates a random timeseries of wave parameters and runup values
+    Loads a randomly generated wave runup dataframe.
+
+    This function returns a randomly generated :obj:`pandas.DataFrame` containing wave
+    parameters and noisey runup values calculated using the Stockdon et al (2006) runup
+    model. This random data is intended to be used to demonstrate runup analysis
+    without having to use actual data
+
+    Args:
+        seed (:obj:`int`): Seed the random number generator
+        t_start (:obj:`datetime.datetime`): Start time of the dataframe
+        t_end (:obj:`datetime.datetime`): End time of the dataframe
+        dt (:obj:`datetime.timedelta`): Time interval of the dataframe
+        hs_range (:obj:`tuple`): Range (`min`, `max`) of the significant wave height
+        tp_range (:obj:`tuple`): Range (`min`, `max`) of the peak wave period
+        beta_range (:obj:`tuple`): Range (`min`, `max`) of the nearshore slope
+        noise_std (:obj:`float`): Standard deviation (in meters) of the wave runup
+            statistics.
+
+    Returns:
+        A :obj:`pandas.DataFrame`
 
     Examples:
-        Get a randomly generated dataframe of wave parameters and noisey runup values.
+        Get
 
     >>> from py_wave_runup import datasets
-    >>> df = datasets.generate_random_stockdon_ts()
+    >>> df = datasets.load_random_sto06()
     >>> df.head()
                                hs        tp      beta  ...     swash       sig      sinc
     2000-01-01 00:00:00  3.000000  6.000000  0.098110  ...  1.171474  0.717714  0.894084
@@ -94,6 +116,7 @@ def generate_random_stockdon_ts(
     2000-01-01 04:00:00  2.906808  6.937742  0.099069  ...  2.001251  1.476527  1.687905
     <BLANKLINE>
     [5 rows x 8 columns]
+
     """
 
     # Create the time index for our dataframe
