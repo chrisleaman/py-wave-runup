@@ -38,7 +38,7 @@ jobs:
         - poetry install -v
       script:
         - echo $PWD
-        - sphinx-build -nWT -vvv -b dummy ".\docs" ".\docs\_build"
+        - sphinx-build -nWT -vvv -b dummy ./docs ./docs/_build
     - stage: deploy
       script:
         - echo Deploying to PyPI...
