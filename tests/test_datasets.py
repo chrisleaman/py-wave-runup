@@ -1,5 +1,6 @@
+from pytest import approx, raises
+
 from py_wave_runup import datasets
-from pytest import raises, approx
 
 
 class TestPower18(object):

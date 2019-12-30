@@ -1,5 +1,6 @@
+from pytest import approx, raises
+
 from py_wave_runup import ensembles
-from pytest import raises, approx
 
 
 class TestEnsembleRaw(object):

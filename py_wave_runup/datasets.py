@@ -4,15 +4,16 @@ can be used to evaluate existing models or train new models. Datasets are return
 :obj:`pandas.DataFrame`.
 """
 
-import pandas as pd
 import io
 import pkgutil
-from datetime import datetime, timedelta
 import random
-from sklearn.preprocessing import minmax_scale
-from py_wave_runup import models
-import numpy as np
+from datetime import datetime, timedelta
 
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import minmax_scale
+
+from py_wave_runup import models
 from py_wave_runup.utils import PerlinNoise
 
 
@@ -128,7 +129,3 @@ def generate_random_stockdon_ts(
     df["sinc"] = model.sinc + noise
 
     return df
-
-
-if __name__ == "__main__":
-    generate_stockdon_ts()

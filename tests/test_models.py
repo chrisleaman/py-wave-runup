@@ -1,6 +1,7 @@
-from py_wave_runup import models
-from pytest import raises, approx
 import numpy as np
+from pytest import approx, raises
+
+from py_wave_runup import models
 
 
 class TestStockdon2006(object):

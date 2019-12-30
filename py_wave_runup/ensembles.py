@@ -3,8 +3,9 @@ This module implements various ensemble techniques to combine the predictions of
 multiple :doc:`models`.
 
 """
-from py_wave_runup import models
 import pandas as pd
+
+from py_wave_runup import models
 
 
 class EnsembleRaw:

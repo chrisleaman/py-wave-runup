@@ -24,6 +24,12 @@ returns the result from Eqn (19):
 First, let's import the Power et al (2018) runup data, which is included in this
 package.
 """
+#############################################
+# Let's now make a plot of observed vs. modelled R2 to assess performance
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.metrics import mean_squared_error, r2_score
+
 import py_wave_runup
 
 df = py_wave_runup.datasets.load_power18()
@@ -44,9 +50,6 @@ df["sto06_r2"] = sto06.R2
 # Check the first few rows of observed vs. modelled R2
 print(df[["r2", "sto06_r2"]].head())
 
-#############################################
-# Let's now make a plot of observed vs. modelled R2 to assess performance
-import matplotlib.pyplot as plt
 
 fig, ax1 = plt.subplots(1, 1, figsize=(4, 4), dpi=300)
 ax1.plot(df.r2, df.sto06_r2, "b.", markersize=2, linewidth=0.5)
@@ -64,8 +67,6 @@ plt.tight_layout()
 #############################################
 # Let's also check RMSE and coefficient of determination values:
 
-import numpy as np
-from sklearn.metrics import r2_score, mean_squared_error
 
 print(f"R2 Score: {r2_score(df.r2, df.sto06_r2):.2f}")
 print(f"RMSE: {np.sqrt(mean_squared_error(df.r2, df.sto06_r2)):.2f} m")
