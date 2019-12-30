@@ -1,16 +1,18 @@
 """
-This module implements different ensemble methods of predicting wave runup. It uses
-the models provided by models.py
-"""
+This module implements various ensemble techniques to combine the predictions of
+multiple :doc:`models`.
 
+"""
 from py_wave_runup import models
 import pandas as pd
 
 
 class EnsembleRaw:
     """
-    This class returns the values for all runup models defined in models.py seperately,
-    i.e. no combining is performed.
+    This class runs predictions on all available runup models and returns the results
+    from each model, i.e. no combining or ensembling is performed. It is provided as
+    a base class for other ensemble models to inherit, they will need access to all
+    predicitions anyway.
     """
 
     def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
@@ -67,7 +69,7 @@ class EnsembleRaw:
         """
         Returns:
             Returns a pandas dataframe where each column contains the estimates
-            returned by each runup model
+            returned by each runup model for the specified parameter.
 
         Args:
             param (:obj:`str`): `R2`, `setup`, `sig`, `sinc` or `swash`
@@ -122,14 +124,3 @@ class EnsembleMean(EnsembleRaw):
         """
         df = self._model_estimates(param)
         return df.mean(axis=1).rename(f"mean_{param}")
-
-
-if __name__ == "__main__":
-    ensemble = EnsembleRaw(Hs=1, Tp=8, beta=0.05)
-    # ensemble = EnsembleRaw(Hs=[1,2], Tp=[8,10], beta=[0.05,0.01])
-    r2 = ensemble.estimate("R2")
-
-    ensemble_mean = EnsembleMean(Hs=[1, 2], Tp=[8, 10], beta=[0.05, 0.01])
-    mean_r2 = ensemble_mean.estimate("R2")
-
-    print("Done")

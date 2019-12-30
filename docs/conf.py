@@ -62,6 +62,14 @@ autoclass_content = "both"
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
+    "pandas": (
+        "http://pandas.pydata.org/pandas-docs/stable/",
+        "http://pandas.pydata.org/pandas-docs/stable/objects.inv",
+    ),
+    "numpy": (
+        "https://docs.scipy.org/doc/numpy/",
+        "https://docs.scipy.org/doc/numpy/objects.inv",
+    ),
 }
 
 # -- Options for HTML output -------------------------------------------------
