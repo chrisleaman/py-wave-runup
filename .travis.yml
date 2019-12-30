@@ -37,6 +37,7 @@ jobs:
         - pip install poetry
         - poetry install -v
       script:
+        - echo $PWD
         - sphinx-build -nWT -vvv -b dummy ".\docs" ".\docs\_build"
     - stage: deploy
       script:
