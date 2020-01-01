@@ -8,6 +8,6 @@ pytest
 pytest-cov
 pytest-runner
 scikit-learn
-sphinx
+sphinx~=2.3
 sphinx-gallery
 tox
