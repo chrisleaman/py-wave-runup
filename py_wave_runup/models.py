@@ -7,6 +7,8 @@ typically based on Hs, Tp, and beta.
 from abc import ABCMeta, abstractmethod
 
 import numpy as np
+from pkg_resources import resource_filename
+import joblib
 
 
 class RunupModel(metaclass=ABCMeta):
@@ -562,5 +564,40 @@ class Senechal2011(RunupModel):
                 .. math: S_{ig} = 0.05 * (H_{s} L_{p})^{0.5}
         """
         result = 0.05 * np.sqrt(self.Hs * self.Lp)
+        result = self._return_one_or_array(result)
+        return result
+
+
+class Beuzen2019(RunupModel):
+    """
+    Implements the Gaussian Process runup model from Beuzen et al (2019).
+
+        Beuzen, T., Goldstein, E. B., & Splinter, K. D., 2019. Ensemble models from
+        machine learning: an example of wave runup and coastal dune erosion.
+        https://doi.org/10.5194/nhess-19-2295-2019
+
+     Examples:
+        Calculate 2% exceedence runup level given Hs=4m, Tp=11s, beta=0.1
+
+        >>> from py_wave_runup.models import Beuzen2019
+        >>> beu19 = Beuzen2019(Hs=4, Tp=11, beta=0.1)
+        >>> beu19.R2
+        1.9723707064298488
+    """
+
+    @property
+    def R2(self):
+        """
+        Returns:
+            The 2% exceedence runup level from a pre-trained Gaussian process model
+        """
+        model_path = resource_filename('py_wave_runup',
+                                       'datasets/gp_runup_model.joblib')
+        with open(model_path, 'rb') as f:
+            model = joblib.load(f)
+
+        result = model.predict(np.atleast_2d(np.concatenate((self.Hs,
+                                                             self.Tp,
+                                                             self.beta))))
         result = self._return_one_or_array(result)
         return result
