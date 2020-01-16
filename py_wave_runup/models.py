@@ -582,7 +582,7 @@ class Beuzen2019(RunupModel):
         >>> from py_wave_runup.models import Beuzen2019
         >>> beu19 = Beuzen2019(Hs=4, Tp=11, beta=0.1)
         >>> beu19.R2
-        1.9723707064298488
+        2.181613070940485
     """
 
     @property
@@ -596,8 +596,8 @@ class Beuzen2019(RunupModel):
         with open(model_path, 'rb') as f:
             model = joblib.load(f)
 
-        result = model.predict(np.atleast_2d(np.concatenate((self.Hs,
-                                                             self.Tp,
-                                                             self.beta))))
+        result = np.squeeze(model.predict(np.column_stack((self.Hs,
+                                                           self.Tp,
+                                                           self.beta))))
         result = self._return_one_or_array(result)
         return result
