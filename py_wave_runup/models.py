@@ -596,8 +596,8 @@ class Beuzen2019(RunupModel):
         with open(model_path, 'rb') as f:
             model = joblib.load(f)
 
-        result = model.predict(np.atleast_2d(np.concatenate((self.Hs,
-                                                             self.Tp,
-                                                             self.beta))))
+        result = np.squeeze(model.predict(np.column_stack((self.Hs,
+                                                           self.Tp,
+                                                           self.beta))))
         result = self._return_one_or_array(result)
         return result
