@@ -582,7 +582,7 @@ class Beuzen2019(RunupModel):
         >>> from py_wave_runup.models import Beuzen2019
         >>> beu19 = Beuzen2019(Hs=4, Tp=11, beta=0.1)
         >>> beu19.R2
-        1.9723707064298488
+        2.181613070940485
     """
 
     @property
