@@ -116,7 +116,6 @@ def load_random_sto06(
     2000-01-01 04:00:00  2.906808  6.937742  0.099069  ...  2.001251  1.476527  1.687905
     <BLANKLINE>
     [5 rows x 8 columns]
-
     """
 
     # Create the time index for our dataframe
