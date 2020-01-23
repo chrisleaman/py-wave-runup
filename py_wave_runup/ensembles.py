@@ -62,7 +62,9 @@ class EnsembleRaw:
         >>> ensemble_r2 = ensemble.estimate('R2')
         >>> ensemble_r2
            Stockdon2006_R2  Power2018_R2  ...  Senechal2011_R2  Beuzen2019_R2
-         0        2.542036           NaN  ...         1.972371       2.181613
+        0        2.542036           NaN  ...         1.972371       2.181613
+        <BLANKLINE>
+        [1 rows x 9 columns]
         """
         return self._model_estimates(param)
 
