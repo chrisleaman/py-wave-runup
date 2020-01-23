@@ -571,7 +571,7 @@ class Senechal2011(RunupModel):
 
 class Beuzen2019(RunupModel):
     """
-    Implements the Gaussian Process runup model from Beuzen et al (2019).
+    Implements the GP runup model from Beuzen et al (2019).
 
         Beuzen, T., Goldstein, E. B., & Splinter, K. D., 2019. Ensemble models from
         machine learning: an example of wave runup and coastal dune erosion.
