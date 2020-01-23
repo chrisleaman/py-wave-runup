@@ -6,9 +6,9 @@ typically based on Hs, Tp, and beta.
 
 from abc import ABCMeta, abstractmethod
 
+import joblib
 import numpy as np
 from pkg_resources import resource_filename
-import joblib
 
 
 class RunupModel(metaclass=ABCMeta):
@@ -591,13 +591,14 @@ class Beuzen2019(RunupModel):
         Returns:
             The 2% exceedence runup level from a pre-trained Gaussian process model
         """
-        model_path = resource_filename('py_wave_runup',
-                                       'datasets/gp_runup_model.joblib')
-        with open(model_path, 'rb') as f:
+        model_path = resource_filename(
+            "py_wave_runup", "datasets/gp_runup_model.joblib"
+        )
+        with open(model_path, "rb") as f:
             model = joblib.load(f)
 
-        result = np.squeeze(model.predict(np.column_stack((self.Hs,
-                                                           self.Tp,
-                                                           self.beta))))
+        result = np.squeeze(
+            model.predict(np.column_stack((self.Hs, self.Tp, self.beta)))
+        )
         result = self._return_one_or_array(result)
         return result
