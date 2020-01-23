@@ -4,6 +4,7 @@ implements a different published model which can be used to estimate wave runup,
 typically based on Hs, Tp, and beta.
 """
 
+import warnings
 from abc import ABCMeta, abstractmethod
 
 import joblib
@@ -594,8 +595,13 @@ class Beuzen2019(RunupModel):
         model_path = resource_filename(
             "py_wave_runup", "datasets/gp_runup_model.joblib"
         )
-        with open(model_path, "rb") as f:
-            model = joblib.load(f)
+
+        # Ignore the warning when unpickling GaussianProcessRegressor from version
+        # 0.22.1.
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            with open(model_path, "rb") as f:
+                model = joblib.load(f)
 
         result = np.squeeze(
             model.predict(np.column_stack((self.Hs, self.Tp, self.beta)))
