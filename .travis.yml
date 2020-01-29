@@ -7,6 +7,11 @@ python:
   - 3.7
   - 3.6
 
+cache:
+  pip: true
+  directories:
+    - "$HOME/.cache/pre-commit"
+
 stages:
   - lint
   - test
