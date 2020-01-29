@@ -11,4 +11,5 @@ pytest-runner==5.*,>=5.1.0
 scikit-learn==0.*,>=0.22.0
 sphinx==2.*,>=2.3.0
 sphinx-gallery==0.*,>=0.5.0
+tomlkit==0.*,>=0.5.8
 tox==3.*,>=3.13.0

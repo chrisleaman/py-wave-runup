@@ -13,18 +13,28 @@
 import os
 import sys
 
+import tomlkit
+
 sys.path.insert(0, os.path.abspath("../py_wave_runup/"))
 
 
 # -- Project information -----------------------------------------------------
+
+# Get project version from pyproject.toml file
+# https://github.com/python-poetry/poetry/issues/273#issuecomment-427647628
+def _get_project_meta():
+    with open("../pyproject.toml") as pyproject:
+        file_contents = pyproject.read()
+    return tomlkit.parse(file_contents)["tool"]["poetry"]
+
 
 project = "py-wave-runup"
 copyright = "2019, Chris Leaman"
 author = "Chris Leaman"
 
 # The full version, including alpha/beta/rc tags
-release = "v0.1.8"
-
+pkg_meta = _get_project_meta()
+release = str(pkg_meta["version"])
 
 # -- General configuration ---------------------------------------------------
 # Add any Sphinx extension module names here, as strings. They can be

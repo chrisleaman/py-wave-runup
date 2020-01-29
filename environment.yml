@@ -16,3 +16,4 @@ dependencies:
 - sphinx ==2.*,>=2.3.0
 - sphinx-gallery ==0.*,>=0.5.0
 - tox ==3.*,>=3.13.0
+- tomlkit ==0.*,>=0.5.8
