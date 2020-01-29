@@ -144,11 +144,13 @@ to create a Pull Request:
     - For `anaconda`_, run ``conda create --name <env_name> --file requirements.txt``
 
 3. Create your feature branch (``git checkout -b feature/fooBar``)
-4. Add and run tests (``pytest``)
-5. Update and check documentation compiles (``sphinx-build -M html ".\docs" ".\docs\_build"``)
-6. Commit your changes (``git commit -am 'Add some fooBar``)
-7. Push to the branch (``git push origin feature/fooBar``)
-8. Create a new Pull Request
+4. Install pre-commit hooks for automatic formatting (``pre-commit run -a``)
+5. Add your code!
+5. Add and run tests (``pytest``)
+6. Update and check documentation compiles (``sphinx-build -M html ".\docs" ".\docs\_build"``)
+7. Commit your changes (``git commit -am 'Add some fooBar``)
+8. Push to the branch (``git push origin feature/fooBar``)
+9. Create a new Pull Request
 
 .. _poetry: https://python-poetry.org/
 .. _anaconda: https://www.anaconda.com/distribution/#download-section
