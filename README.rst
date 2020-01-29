@@ -146,11 +146,11 @@ to create a Pull Request:
 3. Create your feature branch (``git checkout -b feature/fooBar``)
 4. Install pre-commit hooks for automatic formatting (``pre-commit run -a``)
 5. Add your code!
-5. Add and run tests (``pytest``)
-6. Update and check documentation compiles (``sphinx-build -M html ".\docs" ".\docs\_build"``)
-7. Commit your changes (``git commit -am 'Add some fooBar``)
-8. Push to the branch (``git push origin feature/fooBar``)
-9. Create a new Pull Request
+6. Add and run tests (``pytest``)
+7. Update and check documentation compiles (``sphinx-build -M html ".\docs" ".\docs\_build"``)
+8. Commit your changes (``git commit -am 'Add some fooBar``)
+9. Push to the branch (``git push origin feature/fooBar``)
+10. Create a new Pull Request
 
 .. _poetry: https://python-poetry.org/
 .. _anaconda: https://www.anaconda.com/distribution/#download-section
