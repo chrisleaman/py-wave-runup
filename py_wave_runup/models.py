@@ -76,27 +76,6 @@ class RunupModel(metaclass=ABCMeta):
         else:
             return val
 
-    @property
-    @abstractmethod
-    def R2(self):
-        raise NotImplementedError
-
-    @property
-    def setup(self):
-        raise NotImplementedError
-
-    @property
-    def sinc(self):
-        raise NotImplementedError
-
-    @property
-    def sig(self):
-        raise NotImplementedError
-
-    @property
-    def swash(self):
-        raise NotImplementedError
-
 
 class Stockdon2006(RunupModel):
     """
@@ -608,6 +587,7 @@ class Beuzen2019(RunupModel):
         )
         result = self._return_one_or_array(result)
         return result
+
 
 class Passarella2018(RunupModel):
     """
