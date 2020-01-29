@@ -1,5 +1,6 @@
 name: py-wave-runup
 channels:
+- conda-forge
 - defaults
 dependencies:
 - black <20.0,>=18.3
