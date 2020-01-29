@@ -641,7 +641,7 @@ class Beuzen2019(RunupModel):
         """
         Xresult = (self.beta / (0.028 + self.beta)) +
                     (-1/((2412.255 * self.beta) - (5.521 * self.beta * self.Lp))) +
-                    ((self.Hs - 0.711)/(0.465 - (173.470 * (self.Hs * self.Lp))))
+                    ((self.Hs - 0.711)/(0.465 - (173.470 * (self.Hs / self.Lp))))
         Xresult = self._return_one_or_array(result)
         return result
     
