@@ -611,11 +611,14 @@ class Passarella2018(RunupModel):
     def sig(self):
         """
         Returns:
-            Infragravity component of swash using Eqn (14)::
+            Infragravity component of swash using Eqn (14):
 
-                .. math: S_{ig} = \frac{\beta}{0.028+\beta} +
-                         \\frac{-1 }{2412.255 \beta - 5.521 \beta L_{p}} +
-                         \\frac{H_{p} - 0.711}{0.465 + 173.470 (\frac{H_{p}}{L_{p}})}
+            .. math::
+
+                S_{ig} = \\frac{\\beta}{0.028+\\beta} +
+                \\frac{-1}{2412.255 \\beta - 5.521 \\beta L_{p}} +
+                \\frac{H_{s} -0.711}{0.465 + 173.470 (\\frac{H_{s}}{L_{p}})}
+
         """
         result = (
             (self.beta / (0.028 + self.beta))
@@ -631,8 +634,11 @@ class Passarella2018(RunupModel):
         Returns:
             Total amount of swash using Eqn (12):
 
-                .. math:: S = 146.737\beta^2 + \frac{T_{p}H_{p}^3}{5.800+10.595H_{p}^3} -
-                           4397.838\beta^4
+                .. math::
+
+                    S = 146.737\\beta^{2} + \\frac{T_{p}H_{s}^{3}}{5.800+10.595H_{
+                    s}^{3}} - 4397.838\\beta^4
+
         """
         result = (
             (146.737 * (self.beta ** 2))
