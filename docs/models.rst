@@ -15,3 +15,5 @@ Wave runup models
         Ruggiero2001
         Vousdoukas2012
         Senechal2011
+        Beuzen2019
+        Passarella2018

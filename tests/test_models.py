@@ -129,3 +129,25 @@ class TestSenechal2011(object):
         model = models.Senechal2011(Hs=4, Tp=11, beta=0.001)
         assert model.R2 == approx(1.97, abs=0.01)
         assert model.sig == approx(1.37, abs=0.01)
+
+
+class TestBeuzenl2019(object):
+    def test_reflective(self):
+        model = models.Beuzen2019(Hs=4, Tp=11, beta=0.1)
+        assert model.R2 == approx(2.18, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Beuzen2019(Hs=4, Tp=11, beta=0.001)
+        assert model.R2 == approx(2.12, abs=0.01)
+
+
+class TestPassarella2018(object):
+    def test_reflective(self):
+        model = models.Passarella2018(Hs=4, Tp=11, beta=0.1)
+        assert model.sig == approx(1.57, abs=0.01)
+        assert model.swash == approx(2.05, abs=0.01)
+
+    def test_dissipative(self):
+        model = models.Passarella2018(Hs=4, Tp=11, beta=0.001)
+        assert model.sig == approx(0.10, abs=0.01)
+        assert model.swash == approx(1.02, abs=0.01)

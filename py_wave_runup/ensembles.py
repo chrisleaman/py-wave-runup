@@ -61,10 +61,10 @@ class EnsembleRaw:
         >>> ensemble = EnsembleRaw(Hs=4, Tp=11, beta=0.1)
         >>> ensemble_r2 = ensemble.estimate('R2')
         >>> ensemble_r2
-           Stockdon2006_R2  Power2018_R2  ...  Atkinson2017_R2  Senechal2011_R2
-        0         2.542036           NaN  ...           3.1775         1.972371
+           Stockdon2006_R2  Power2018_R2  ...  Senechal2011_R2  Beuzen2019_R2
+        0        2.542036           NaN  ...         1.972371       2.181613
         <BLANKLINE>
-        [1 rows x 8 columns]
+        [1 rows x 9 columns]
         """
         return self._model_estimates(param)
 
@@ -125,8 +125,8 @@ class EnsembleMean(EnsembleRaw):
         >>> ensemble = EnsembleMean(Hs=[3,4], Tp=[10,11], beta=[0.09,0.1])
         >>> ensemble_r2 = ensemble.estimate('R2')
         >>> ensemble_r2
-        0    2.01381
-        1    2.64924
+        0    1.969634
+        1    2.590786
         Name: mean_R2, dtype: float64
         """
         df = self._model_estimates(param)

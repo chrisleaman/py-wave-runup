@@ -60,6 +60,8 @@ The following `wave runup models`_ are available for use:
 - ``models.Ruggiero2001``: Based on runup measurements from dissipative Orgeon beaches.
 - ``models.Vousdoukas2012``: Based on runup from European Atlantic coast
 - ``models.Senechal2011``: Based on extreme storm condition at Truc Vert, France
+- ``models.Beuzen2019``: Gaussian Process (GP) runup model
+- ``models.Passarella2018``: Genetic Programming (infragravity and total) swash model 
 
 To get calculate runup, setup and swash, define your offshore conditions in your
 selected runup model then you can access each parameter:
