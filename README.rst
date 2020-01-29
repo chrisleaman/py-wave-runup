@@ -139,9 +139,9 @@ to create a Pull Request:
 1. Fork it (https://github.com/chrisleaman/py-wave-runup/fork)
 2. Create the development environment:
 
-    - For pip, run ``pip install -r requirements.txt``
+    - For pip, run ``pip install --pre -r requirements.txt``
     - For `poetry`_, run ``poetry install``
-    - For `anaconda`_, run ``conda create --name <env_name> --file environment.yml``
+    - For `anaconda`_, run ``conda env create --name <env_name> -f environment.yml``
 
 3. Create your feature branch (``git checkout -b feature/fooBar``)
 4. Install pre-commit hooks for automatic formatting (``pre-commit run -a``)
