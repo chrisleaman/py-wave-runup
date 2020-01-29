@@ -99,7 +99,7 @@ of the water "runup" and rundown the beach. It is comprised of two components:
 Setup, swash and other components of Total Water Level (TWL) rise are shown in this
 handy figure below.
 
-.. image:: ./docs/_static/VitousekDoubling2017Fig1.jpg
+.. image:: https://raw.githubusercontent.com/chrisleaman/py-wave-runup/master/docs/_static/VitousekDoubling2017Fig1.jpg
    :width: 500 px
    :align: center
 ..
