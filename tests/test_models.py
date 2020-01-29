@@ -139,8 +139,8 @@ class TestBeuzenl2019(object):
     def test_dissipative(self):
         model = models.Beuzen2019(Hs=4, Tp=11, beta=0.001)
         assert model.R2 == approx(2.12, abs=0.01)
-        
-        
+
+
 class TestPassarella2018(object):
     def test_reflective(self):
         model = models.Passarella2018(Hs=4, Tp=11, beta=0.1)

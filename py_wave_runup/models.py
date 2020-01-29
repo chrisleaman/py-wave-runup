@@ -608,10 +608,8 @@ class Beuzen2019(RunupModel):
         )
         result = self._return_one_or_array(result)
         return result
-    
-    
-    class Passarella2018(RunupModel):
 
+class Passarella2018(RunupModel):
     """
     Implements the Infragravity Swash model from Passarella et al (2018)
 
@@ -620,7 +618,7 @@ class Beuzen2019(RunupModel):
         Nat. Hazards Earth Syst. Sci., 18, 599-611,
         https://doi.org/10.5194/nhess-18-599-2018
 
-     Examples:
+    Examples:
         Calculate IG swash given Hs=4m, Tp=11s, beta=0.1
 
         >>> from py_wave_runup.models import Passarrella2018
@@ -639,13 +637,14 @@ class Beuzen2019(RunupModel):
                          \\frac{-1 }{2412.255 \beta - 5.521 \beta L_{p}} +
                          \\frac{H_{p} - 0.711}{0.465 + 173.470 (\frac{H_{p}}{L_{p}})}
         """
-        Xresult = (self.beta / (0.028 + self.beta)) +
-                    (-1/((2412.255 * self.beta) - (5.521 * self.beta * self.Lp))) +
-                    ((self.Hs - 0.711)/(0.465 + (173.470 * (self.Hs / self.Lp))))
-        Xresult = self._return_one_or_array(result)
+        result = (
+            (self.beta / (0.028 + self.beta))
+            + (-1 / ((2412.255 * self.beta) - (5.521 * self.beta * self.Lp)))
+            + ((self.Hs - 0.711) / (0.465 + (173.470 * (self.Hs / self.Lp))))
+        )
+        result = self._return_one_or_array(result)
         return result
-    
-    
+
     @property
     def swash(self):
         """
@@ -655,7 +654,10 @@ class Beuzen2019(RunupModel):
                 .. math:: S = 146.737\beta^2 + \frac{T_{p}H_{p}^3}{5.800+10.595H_{p}^3} -
                            4397.838\beta^4
         """
-        Xresult =  (146.737 * (self.beta ** 2)) + ((self.Tp * (self.Hs ** 3)) / (5.800 + (10.595 * (self.Hs ** 3)))) - 4397.838 * (self.beta ** 4)
-        Xresult = self._return_one_or_array(result)
+        result = (
+            (146.737 * (self.beta ** 2))
+            + ((self.Tp * (self.Hs ** 3)) / (5.800 + (10.595 * (self.Hs ** 3))))
+            - 4397.838 * (self.beta ** 4)
+        )
+        result = self._return_one_or_array(result)
         return result
-    
