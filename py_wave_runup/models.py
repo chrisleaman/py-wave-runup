@@ -560,7 +560,7 @@ class Senechal2011(RunupModel):
     def sig(self):
         """
         Returns:
-            Infragravity componennt of swash:
+            Infragravity component of swash:
 
                 .. math: S_{ig} = 0.05 * (H_{s} L_{p})^{0.5}
         """
@@ -608,3 +608,54 @@ class Beuzen2019(RunupModel):
         )
         result = self._return_one_or_array(result)
         return result
+    
+    
+    class Passarella2018(RunupModel):
+
+    """
+    Implements the Infragravity Swash model from Passarella et al (2018)
+
+        Passarella, M., E. B. Goldstein, S. De Muro, G. Coco, 2018.
+        The use of genetic programming to develop a predictor of swash excursion on sandy beaches.
+        Nat. Hazards Earth Syst. Sci., 18, 599-611,
+        https://doi.org/10.5194/nhess-18-599-2018
+
+     Examples:
+        Calculate IG swash given Hs=4m, Tp=11s, beta=0.1
+
+        >>> from py_wave_runup.models import Passarrella2018
+        >>> pas18 = Passarella2018(Hs=4, Tp=11, beta=0.1)
+        >>> pas18.sig
+        0.7739215663041891
+    """
+
+    @property
+    def sig(self):
+        """
+        Returns:
+            Infragravity component of swash using Eqn (14)::
+
+                .. math: S_{ig} = \frac{\beta}{0.028+\beta} +
+                         \\frac{-1 }{2412.255 \beta - 5.521 \beta L_{p}} +
+                         \\frac{H_{p} - 0.711}{0.465 + 173.470 (\frac{H_{p}}{L_{p}})}
+        """
+        Xresult = (self.beta / (0.028 + self.beta)) +
+                    (-1/((2412.255 * self.beta) - (5.521 * self.beta * self.Lp))) +
+                    ((self.Hs - 0.711)/(0.465 - (173.470 * (self.Hs * self.Lp))))
+        Xresult = self._return_one_or_array(result)
+        return result
+    
+    
+    @property
+    def swash(self):
+        """
+        Returns:
+            Total amount of swash using Eqn (12):
+
+                .. math:: S = 146.737\beta^2 + \frac{T_{p}H_{p}^3}{5.800+10.595H_{p}^3} -
+                           4397.838\beta^4
+        """
+        Xresult =  (146.737 * (self.beta ** 2)) + ((self.Tp * (self.Hs ** 3)) / (5.800 + (10.595 * (self.Hs ** 3)))) - 4397.838 * (self.beta ** 4)
+        Xresult = self._return_one_or_array(result)
+        return result
+    
