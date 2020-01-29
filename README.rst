@@ -141,7 +141,7 @@ to create a Pull Request:
 
     - For pip, run ``pip install -r requirements.txt``
     - For `poetry`_, run ``poetry install``
-    - For `anaconda`_, run ``conda create --name <env_name> --file requirements.txt``
+    - For `anaconda`_, run ``conda create --name <env_name> --file environment.yml``
 
 3. Create your feature branch (``git checkout -b feature/fooBar``)
 4. Install pre-commit hooks for automatic formatting (``pre-commit run -a``)
