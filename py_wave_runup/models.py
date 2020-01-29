@@ -621,7 +621,7 @@ class Passarella2018(RunupModel):
     Examples:
         Calculate IG swash given Hs=4m, Tp=11s, beta=0.1
 
-        >>> from py_wave_runup.models import Passarrella2018
+        >>> from py_wave_runup.models import Passarella2018
         >>> pas18 = Passarella2018(Hs=4, Tp=11, beta=0.1)
         >>> pas18.sig
         1.5687930560916425
