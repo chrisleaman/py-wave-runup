@@ -25,7 +25,7 @@ pytest = "^5.4"
 pytest-cov = "^2.8"
 scikit-learn = "^0.22"
 sphinx = "^2.4"
-sphinx-gallery = "^0.5.0"
+sphinx-gallery = "^0.6.2"
 tox = "^3.14"
 tomlkit = "^0.5.11"
 
