@@ -13,7 +13,7 @@ documentation = 'https://py-wave-runup.readthedocs.io'
 python = "^3.6 || ^3.7 || ^3.8"
 numpy = "^1.16"
 pandas = "^0.25.3"
-joblib = "^0.14.1"
+joblib = ">=0.14.1,<0.16.0"
 
 [tool.poetry.dev-dependencies]
 black = {version = ">=18.3,<20.0", allow-prereleases = true}
