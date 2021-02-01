@@ -17,7 +17,7 @@ joblib = ">=0.14.1,<0.17.0"
 
 [tool.poetry.dev-dependencies]
 black = {version = ">=18.3,<20.0", allow-prereleases = true}
-coverage = "^5.1"
+coverage = "^5.4"
 codecov = "^2.1"
 pre-commit = "^2.1"
 pytest-runner = "^5.1"
