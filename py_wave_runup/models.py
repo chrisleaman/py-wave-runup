@@ -605,8 +605,8 @@ class Beuzen2019(RunupModel):
 
         >>> from py_wave_runup.models import Beuzen2019
         >>> beu19 = Beuzen2019(Hs=4, Tp=11, beta=0.1)
-        >>> beu19.R2
-        2.181613070940485
+        >>> f"{beu19.R2:.2f}"
+        '2.08'
     """
 
     @property
@@ -616,7 +616,7 @@ class Beuzen2019(RunupModel):
             The 2% exceedence runup level from a pre-trained Gaussian process model
         """
         model_path = resource_filename(
-            "py_wave_runup", "datasets/gp_runup_model.joblib"
+            "py_wave_runup", "datasets/beuzen18/gp_runup_model.joblib"
         )
 
         # Ignore the warning when unpickling GaussianProcessRegressor from version
