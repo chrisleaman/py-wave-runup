@@ -6,10 +6,10 @@ Code and data copied from:
 https://github.com/TomasBeuzen/BeuzenEtAl_2019_NHESS_GP_runup_model/blob/master/paper_code/Beuzen_et_al_2019_code.ipynb
 """
 
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, WhiteKernel
 import pandas as pd
 from joblib import dump, load
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import RBF, WhiteKernel
 
 
 def main():
