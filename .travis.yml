@@ -37,7 +37,7 @@ jobs:
       script:
         - pre-commit run --all-files
     - stage: docs
-      python: 3.7
+      python: 3.9
       install:
         - pip install poetry
         - poetry install -v
