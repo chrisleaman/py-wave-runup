@@ -19,7 +19,7 @@ class RunupModel(metaclass=ABCMeta):
 
     doi = None
 
-    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, r=None):
+    def __init__(self, Hs=None, Tp=None, beta=None, Lp=None, h=None, r=None):
         """
         Args:
             Hs (:obj:`float` or :obj:`list`): Significant wave height. In order to
@@ -32,6 +32,8 @@ class RunupModel(metaclass=ABCMeta):
                 Must be defined if ``Lp`` is not defined.
             Lp (:obj:`float` or :obj:`list`): Peak wave length
                 Must be definied if ``Tp`` is not defined.
+            h (:obj:`float` or :obj:`list`): Depth of wave measurement(s). If not
+                given deep-water conditions are assumed.
             r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
                 approximated by :math:`r=2.5D_{50}`.
         """
@@ -40,6 +42,7 @@ class RunupModel(metaclass=ABCMeta):
         self.Tp = Tp
         self.beta = beta
         self.Lp = Lp
+        self.h = h
         self.r = r
 
         # Ensure wave length or peak period is specified
@@ -48,17 +51,29 @@ class RunupModel(metaclass=ABCMeta):
 
         # Ensure input is atleast 1d numpy array, this is so we can handle lists,
         # arrays and floats.
-        self.Hs = np.atleast_1d(Hs).astype(np.float)
-        self.beta = np.atleast_1d(beta).astype(np.float)
-        self.r = np.atleast_1d(r).astype(np.float)
+        self.Hs = np.atleast_1d(Hs).astype(float)
+        self.beta = np.atleast_1d(beta).astype(float)
+        self.r = np.atleast_1d(r).astype(float)
 
         # Calculate wave length if it hasn't been specified.
         if not Lp:
             self.Tp = np.atleast_1d(Tp)
-            self.Lp = 9.81 * (self.Tp ** 2) / 2 / np.pi
+            if self.h:
+                k = []
+                for T in self.Tp:
+                    k.append(self._newtRaph(T, self.h))
+                self.Lp = (2 * np.pi) / np.array(k)
+            else:
+                self.Lp = 9.81 * (self.Tp ** 2) / 2 / np.pi
         else:
             self.Lp = np.atleast_1d(Lp)
-            self.Tp = np.sqrt(2 * np.pi * self.Lp / 9.81)
+            if self.h:
+                self.Tp = np.sqrt(
+                    (2 * np.pi * self.Lp)
+                    / (9.81 * np.tanh((2 * np.pi * self.h) / self.Lp))
+                )
+            else:
+                self.Tp = np.sqrt(2 * np.pi * self.Lp / 9.81)
 
         # Ensure arrays are of the same size
         if len(set(x.size for x in [self.Hs, self.Tp, self.beta, self.Lp])) != 1:
@@ -75,6 +90,35 @@ class RunupModel(metaclass=ABCMeta):
             return val.item()
         else:
             return val
+
+    def _newtRaph(self, T, h):
+
+        # Function to determine k from dispersion relation given period (T) and depth (h) using
+        # the Newton-Raphson method.
+
+        if not np.isnan(T):
+            L_not = (9.81 * (T ** 2)) / (2 * np.pi)
+            k1 = (2 * np.pi) / L_not
+
+            def fk(k):
+                return (((2 * np.pi) / T) ** 2) - (9.81 * k * np.tanh(k * h))
+
+            def f_prime_k(k):
+                return (-9.81 * np.tanh(k * h)) - (
+                    9.81 * k * (1 - (np.tanh(k * h) ** 2))
+                )
+
+            k2 = 100
+            i = 0
+            while abs((k2 - k1)) / k1 > 0.01:
+                i += 1
+                if i != 1:
+                    k1 = k2
+                k2 = k1 - (fk(k1) / f_prime_k(k1))
+        else:
+            k2 = np.nan  # pragma: no cover
+
+        return k2
 
 
 class Stockdon2006(RunupModel):
@@ -561,8 +605,8 @@ class Beuzen2019(RunupModel):
 
         >>> from py_wave_runup.models import Beuzen2019
         >>> beu19 = Beuzen2019(Hs=4, Tp=11, beta=0.1)
-        >>> beu19.R2
-        2.181613070940485
+        >>> f"{beu19.R2:.2f}"
+        '2.08'
     """
 
     @property
@@ -572,7 +616,7 @@ class Beuzen2019(RunupModel):
             The 2% exceedence runup level from a pre-trained Gaussian process model
         """
         model_path = resource_filename(
-            "py_wave_runup", "datasets/gp_runup_model.joblib"
+            "py_wave_runup", "datasets/beuzen18/gp_runup_model.joblib"
         )
 
         # Ignore the warning when unpickling GaussianProcessRegressor from version

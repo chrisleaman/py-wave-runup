@@ -19,28 +19,28 @@ from py_wave_runup.utils import PerlinNoise
 
 def load_power18():
     """
-        Loads wave runup data included with Power et al (2018)
+    Loads wave runup data included with Power et al (2018)
 
-        This function loads the supplementary data from:
+    This function loads the supplementary data from:
 
-            Power, H.E., Gharabaghi, B., Bonakdari, H., Robertson, B., Atkinson, A.L.,
-            Baldock, T.E., 2018. Prediction of wave runup on beaches using
-            Gene-Expression Programming and empirical relationships. Coastal Engineering.
-            https://doi.org/10.1016/j.coastaleng.2018.10.006
+        Power, H.E., Gharabaghi, B., Bonakdari, H., Robertson, B., Atkinson, A.L.,
+        Baldock, T.E., 2018. Prediction of wave runup on beaches using
+        Gene-Expression Programming and empirical relationships. Coastal Engineering.
+        https://doi.org/10.1016/j.coastaleng.2018.10.006
 
-        Examples:
-            >>> from py_wave_runup import datasets
-            >>> df = datasets.load_power18()
-            >>> df.describe()
-                            hs           tp         beta    roughness           r2
-            count  1390.000000  1390.000000  1390.000000  1390.000000  1390.000000
-            mean      1.893131     9.227035     0.120612     0.024779     2.318814
-            std       1.309243     3.589004     0.062236     0.043617     1.776918
-            min       0.018576     0.805805     0.009000     0.000003     0.027336
-            25%       0.895942     7.517556     0.088228     0.001000     1.103500
-            50%       1.848050     9.963089     0.108422     0.003750     1.923500
-            75%       2.391756    10.995500     0.129220     0.007500     3.406660
-            max       7.174100    23.680333     0.286551     0.125000    12.669592
+    Examples:
+        >>> from py_wave_runup import datasets
+        >>> df = datasets.load_power18()
+        >>> df.describe()
+                        hs           tp         beta    roughness           r2
+        count  1390.000000  1390.000000  1390.000000  1390.000000  1390.000000
+        mean      1.893131     9.227035     0.120612     0.024779     2.318814
+        std       1.309243     3.589004     0.062236     0.043617     1.776918
+        min       0.018576     0.805805     0.009000     0.000003     0.027336
+        25%       0.895942     7.517556     0.088228     0.001000     1.103500
+        50%       1.848050     9.963089     0.108422     0.003750     1.923500
+        75%       2.391756    10.995500     0.129220     0.007500     3.406660
+        max       7.174100    23.680333     0.286551     0.125000    12.669592
 
     """
 

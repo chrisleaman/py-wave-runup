@@ -25,6 +25,14 @@ class TestStockdon2006(object):
         model = models.Stockdon2006(Hs=4, Lp=200, beta=0.05)
         assert model.R2 == approx(1.69, 0.1)
 
+    def test_depth_and_period(self):
+        model = models.Stockdon2006(Hs=4, Tp=12, h=15, beta=0.05)
+        assert model.R2 == approx(1.00, 0.1)
+
+    def test_depth_and_wavelength(self):
+        model = models.Stockdon2006(Hs=4, Lp=200, h=15, beta=0.05)
+        assert model.R2 == approx(1.69, 0.1)
+
     def test_list_input(self):
         model = models.Stockdon2006(Hs=[1, 2], Lp=[100, 200], beta=[0.05, 0.1])
         assert model.R2 == approx((0.59, 1.84), abs=0.1)
@@ -134,11 +142,11 @@ class TestSenechal2011(object):
 class TestBeuzenl2019(object):
     def test_reflective(self):
         model = models.Beuzen2019(Hs=4, Tp=11, beta=0.1)
-        assert model.R2 == approx(2.18, abs=0.01)
+        assert model.R2 == approx(2.08, abs=0.01)
 
     def test_dissipative(self):
         model = models.Beuzen2019(Hs=4, Tp=11, beta=0.001)
-        assert model.R2 == approx(2.12, abs=0.01)
+        assert model.R2 == approx(2.06, abs=0.01)
 
 
 class TestPassarella2018(object):
