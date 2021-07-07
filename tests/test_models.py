@@ -25,6 +25,14 @@ class TestStockdon2006(object):
         model = models.Stockdon2006(Hs=4, Lp=200, beta=0.05)
         assert model.R2 == approx(1.69, 0.1)
 
+    def test_depth_and_period(self):
+        model = models.Stockdon2006(Hs=4, Tp=12, h=15, beta=0.05)
+        assert model.R2 == approx(1.00, 0.1)
+
+    def test_depth_and_wavelength(self):
+        model = models.Stockdon2006(Hs=4, Lp=200, h=15, beta=0.05)
+        assert model.R2 == approx(1.69, 0.1)
+
     def test_list_input(self):
         model = models.Stockdon2006(Hs=[1, 2], Lp=[100, 200], beta=[0.05, 0.1])
         assert model.R2 == approx((0.59, 1.84), abs=0.1)

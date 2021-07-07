@@ -51,9 +51,9 @@ class RunupModel(metaclass=ABCMeta):
 
         # Ensure input is atleast 1d numpy array, this is so we can handle lists,
         # arrays and floats.
-        self.Hs = np.atleast_1d(Hs).astype(np.float)
-        self.beta = np.atleast_1d(beta).astype(np.float)
-        self.r = np.atleast_1d(r).astype(np.float)
+        self.Hs = np.atleast_1d(Hs).astype(float)
+        self.beta = np.atleast_1d(beta).astype(float)
+        self.r = np.atleast_1d(r).astype(float)
 
         # Calculate wave length if it hasn't been specified.
         if not Lp:
@@ -61,8 +61,8 @@ class RunupModel(metaclass=ABCMeta):
             if self.h:
                 k = []
                 for T in self.Tp:
-                    k.append(_newtRaph(T, self.h))
-                self.Lp = (2 * np.pi) / k
+                    k.append(self._newtRaph(T, self.h))
+                self.Lp = (2 * np.pi) / np.array(k)
             else:
                 self.Lp = 9.81 * (self.Tp ** 2) / 2 / np.pi
         else:
@@ -116,7 +116,7 @@ class RunupModel(metaclass=ABCMeta):
                     k1 = k2
                 k2 = k1 - (fk(k1) / f_prime_k(k1))
         else:
-            k2 = np.nan
+            k2 = np.nan # pragma: no cover
 
         return k2
 
