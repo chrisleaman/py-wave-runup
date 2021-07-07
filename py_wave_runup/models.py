@@ -32,7 +32,7 @@ class RunupModel(metaclass=ABCMeta):
                 Must be defined if ``Lp`` is not defined.
             Lp (:obj:`float` or :obj:`list`): Peak wave length
                 Must be definied if ``Tp`` is not defined.
-            h (:obj:`float` or :obj:`list`): Depth of wave measurement(s). If not 
+            h (:obj:`float` or :obj:`list`): Depth of wave measurement(s). If not
                 given deep-water conditions are assumed.
             r (:obj:`float` or :obj:`list`): Hydraulic roughness length. Can be
                 approximated by :math:`r=2.5D_{50}`.
@@ -61,14 +61,17 @@ class RunupModel(metaclass=ABCMeta):
             if self.h:
                 k = []
                 for T in self.Tp:
-                    k.append(_newtRaph(T,self.h))
-                self.Lp = (2*np.pi)/k
+                    k.append(_newtRaph(T, self.h))
+                self.Lp = (2 * np.pi) / k
             else:
                 self.Lp = 9.81 * (self.Tp ** 2) / 2 / np.pi
         else:
             self.Lp = np.atleast_1d(Lp)
             if self.h:
-                self.Tp = np.sqrt( (2*np.pi*self.Lp)/(9.81*np.tanh((2*np.pi*self.h)/self.Lp)) )
+                self.Tp = np.sqrt(
+                    (2 * np.pi * self.Lp)
+                    / (9.81 * np.tanh((2 * np.pi * self.h) / self.Lp))
+                )
             else:
                 self.Tp = np.sqrt(2 * np.pi * self.Lp / 9.81)
 
@@ -87,28 +90,31 @@ class RunupModel(metaclass=ABCMeta):
             return val.item()
         else:
             return val
-        
-    def _newtRaph(self,T,h):
+
+    def _newtRaph(self, T, h):
 
         # Function to determine k from dispersion relation given period (T) and depth (h) using
         # the Newton-Raphson method.
 
         if not np.isnan(T):
-            L_not = (9.81*(T**2))/(2*np.pi)
-            k1 = (2*np.pi)/L_not
+            L_not = (9.81 * (T ** 2)) / (2 * np.pi)
+            k1 = (2 * np.pi) / L_not
 
             def fk(k):
-                return (((2*np.pi)/T)**2)-(9.81*k*np.tanh(k*h))
+                return (((2 * np.pi) / T) ** 2) - (9.81 * k * np.tanh(k * h))
+
             def f_prime_k(k):
-                return (-9.81*np.tanh(k*h))-(9.81*k*(1-(np.tanh(k*h)**2)))
+                return (-9.81 * np.tanh(k * h)) - (
+                    9.81 * k * (1 - (np.tanh(k * h) ** 2))
+                )
 
             k2 = 100
             i = 0
-            while abs((k2-k1))/k1 > 0.01:
-                  i+=1
-                  if i!=1:
-                      k1=k2
-                  k2 = k1-(fk(k1)/f_prime_k(k1))
+            while abs((k2 - k1)) / k1 > 0.01:
+                i += 1
+                if i != 1:
+                    k1 = k2
+                k2 = k1 - (fk(k1) / f_prime_k(k1))
         else:
             k2 = np.nan
 
