@@ -116,7 +116,7 @@ class RunupModel(metaclass=ABCMeta):
                     k1 = k2
                 k2 = k1 - (fk(k1) / f_prime_k(k1))
         else:
-            k2 = np.nan # pragma: no cover
+            k2 = np.nan  # pragma: no cover
 
         return k2
 
