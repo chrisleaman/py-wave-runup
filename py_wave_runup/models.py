@@ -38,12 +38,16 @@ class RunupModel(metaclass=ABCMeta):
                 approximated by :math:`r=2.5D_{50}`.
         """
 
+        # Given parameters
         self.Hs = Hs
         self.Tp = Tp
         self.beta = beta
         self.Lp = Lp
         self.h = h
         self.r = r
+
+        # Calculated parameters
+        self.zeta = None
 
         # Ensure wave length or peak period is specified
         if all(v is None for v in [Lp, Tp]):
@@ -616,7 +620,7 @@ class Beuzen2019(RunupModel):
             The 2% exceedence runup level from a pre-trained Gaussian process model
         """
         model_path = resource_filename(
-            "py_wave_runup", "datasets/beuzen18/gp_runup_model.joblib"
+            "py_wave_runup", "data/beuzen18/gp_runup_model.joblib"
         )
 
         # Ignore the warning when unpickling GaussianProcessRegressor from version

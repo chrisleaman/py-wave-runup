@@ -12,8 +12,9 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF, WhiteKernel
 
 
-def main():
-    df = pd.read_csv("lidar_runup_data_for_GP_training.csv", index_col=0)
+def train_model(save_model=False):
+    data_file = "./py_wave_runup/data/beuzen18/lidar_runup_data_for_GP_training.csv"
+    df = pd.read_csv(data_file, index_col=0)
 
     # Define features and response data
     X = df.drop(
@@ -30,8 +31,9 @@ def main():
     )
     gp.fit(X, y)
 
-    dump(gp, "gp_runup_model.joblib")
+    if save_model:
+        dump(gp, "gp_runup_model.joblib")
 
 
 if __name__ == "__main__":
-    main()
+    train_model()

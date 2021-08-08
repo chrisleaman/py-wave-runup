@@ -1,6 +1,7 @@
 from pytest import approx, raises
 
 from py_wave_runup import datasets
+from py_wave_runup.data.beuzen18.generate_beuzen18_model import train_model
 
 
 class TestPower18(object):
@@ -19,3 +20,8 @@ class TestPower18(object):
             "r2": 1.979,
         }
         assert first_row == df.iloc[0].to_dict()
+
+
+class TestBeuzen18Dataset(object):
+    def test_data_training(self):
+        train_model(save_model=False)
