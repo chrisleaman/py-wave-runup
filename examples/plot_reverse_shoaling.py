@@ -9,10 +9,12 @@ run-up is calculated.
 First, let's import our required packages:
 """
 #############################################
-import pandas as pd
-import numpy as np
-from py_wave_runup import utils
 
+
+import numpy as np
+import pandas as pd
+
+from py_wave_runup import utils
 
 #############################################
 # First, create a dummy data set. Water depth of observed/measured/modeled significant
