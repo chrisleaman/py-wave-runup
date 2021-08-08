@@ -89,7 +89,7 @@ def calculate_Lo(df):
 
     Example of use:
     df['Lo'] = utils.calculate_Lo(df)
-    See examples/reverse_shoaling.py
+    See examples/plot_reverse_shoaling.py
     """
     g = 9.81  # in m/s2
     Lo = (g * df.Tp * df.Tp) / (2.0 * np.pi)
@@ -181,7 +181,7 @@ def determine_waveDepth(df):
 
     Example of use:
     df['wave_depth'] = utils.determine_waveDepth(df)
-    See examples/reverse_shoaling.py
+    See examples/plot_reverse_shoaling.py
 
     """
     # create a list of conditions
