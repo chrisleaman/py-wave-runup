@@ -600,7 +600,7 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-gallery"
-version = "0.9.0"
+version = "0.10.0"
 description = "A Sphinx extension that builds an HTML version of any Python script and puts it into an examples gallery."
 category = "dev"
 optional = false
@@ -798,7 +798,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7 || ^3.8 || ^3.9"
-content-hash = "c4f54137f1318dc7e072c441c213b48ae895a922bfa4982c9ead9af16e915c35"
+content-hash = "3b234a28d7ff8c2c98e840e6428e0df28405081ab791494379c195c6b8ca2f48"
 
 [metadata.files]
 alabaster = [
@@ -1386,7 +1386,7 @@ sphinx = [
     {file = "Sphinx-4.1.2.tar.gz", hash = "sha256:3092d929cd807926d846018f2ace47ba2f3b671b309c7a89cd3306e80c826b13"},
 ]
 sphinx-gallery = [
-    {file = "sphinx-gallery-0.9.0.tar.gz", hash = "sha256:14a2ecbfc172a5623f11d1cb9a5a9e21d5e2e65b76bb6f2174ca8a544f86fe93"},
+    {file = "sphinx-gallery-0.10.0.tar.gz", hash = "sha256:d602663beddf7c2d42771a87afec22054c65105695e955e8d6dc5b654a417921"},
 ]
 sphinxcontrib-applehelp = [
     {file = "sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},
