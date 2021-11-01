@@ -28,7 +28,7 @@ tox = "^3.24"
 tomlkit = "^0.7.0"
 black = "^21.8b0"
 matplotlib = "^3.4.3"
-scikit-learn = {version = "^0.24.2", allow-prereleases = true}
+scikit-learn = {version = "^1.0.1", allow-prereleases = true}
 
 [build-system]
 requires = ["poetry>=0.12"]
