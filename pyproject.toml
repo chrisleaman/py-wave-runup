@@ -26,7 +26,7 @@ sphinx = "^4.1"
 sphinx-gallery = "^0.9.0"
 tox = "^3.24"
 tomlkit = "^0.7.0"
-black = "^21.8b0"
+black = "^21.11b1"
 matplotlib = "^3.4.3"
 scikit-learn = {version = "^0.24.2", allow-prereleases = true}
 
