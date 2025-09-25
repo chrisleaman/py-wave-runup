@@ -20,12 +20,12 @@ sys.path.insert(0, os.path.abspath("../py_wave_runup/"))
 
 # -- Project information -----------------------------------------------------
 
+
 # Get project version from pyproject.toml file
-# https://github.com/python-poetry/poetry/issues/273#issuecomment-427647628
 def _get_project_meta():
     with open("../pyproject.toml") as pyproject:
         file_contents = pyproject.read()
-    return tomlkit.parse(file_contents)["tool"]["poetry"]
+    return tomlkit.parse(file_contents)["project"]
 
 
 project = "py-wave-runup"
@@ -114,6 +114,7 @@ html_theme_options = {
 }
 
 # Autodoc options
+
 
 # Define what classes to skip
 def autodoc_skip_member(app, what, name, obj, skip, options):

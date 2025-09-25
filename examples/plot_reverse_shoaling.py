@@ -8,6 +8,7 @@ run-up is calculated.
 
 First, let's import our required packages:
 """
+
 #############################################
 
 
@@ -36,10 +37,11 @@ df["beta"] = np.random.uniform(0.05, 0.2)
 # Reverse shoaling of wave forecasts:
 
 # Calculate the deep water wave length
-df["Lo"] = utils.calculate_Lo(df)
+df = df.copy()  # Ensure we work with a copy to avoid pandas warnings
+df.loc[:, "Lo"] = utils.calculate_Lo(df)
 # Evaluate whether in shallow, intermediate, or deep water
-df["wave_depth"] = utils.determine_waveDepth(df)
+df.loc[:, "wave_depth"] = utils.determine_waveDepth(df)
 # Compute the deep water wave height
-df["Ho"] = utils.reverse_shoal(df)
+df.loc[:, "Ho"] = utils.reverse_shoal(df)
 
 df

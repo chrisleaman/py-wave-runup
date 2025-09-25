@@ -11,9 +11,6 @@ Python Wave Runup
 .. image:: https://img.shields.io/pypi/v/py-wave-runup.svg
         :target: https://pypi.python.org/pypi/py-wave-runup
 
-.. image:: https://img.shields.io/travis/com/chrisleaman/py-wave-runup.svg
-        :target: https://travis-ci.com/chrisleaman/py-wave-runup
-
 .. image:: https://readthedocs.org/projects/py-wave-runup/badge/?version=latest
     :target: https://py-wave-runup.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
@@ -41,10 +38,14 @@ Contents
 Installation
 ------------
 
-Installation of ``py-wave-runup`` can be done with pip:
+Installation of ``py-wave-runup`` can be done with uv or pip:
 
 .. code:: bash
 
+    # Using uv (recommended)
+    uv add py-wave-runup
+
+    # Using pip
     pip install py-wave-runup
 
 
@@ -139,21 +140,39 @@ to create a Pull Request:
 1. Fork it (https://github.com/chrisleaman/py-wave-runup/fork)
 2. Create the development environment:
 
-    - For pip, run ``pip install --pre -r requirements.txt``
-    - For `poetry`_, run ``poetry install``
-    - For `anaconda`_, run ``conda env create --name <env_name> -f environment.yml``
+    - Using `uv`_ (recommended): ``uv sync --dev``
+    - For pip: ``pip install -e ".[dev]"``
 
 3. Create your feature branch (``git checkout -b feature/fooBar``)
-4. Install pre-commit hooks for automatic formatting (``pre-commit run -a``)
+4. Install pre-commit hooks for automatic formatting (``uv run pre-commit install``)
 5. Add your code!
-6. Add and run tests (``pytest``)
-7. Update and check documentation compiles (``sphinx-build -M html ".\docs" ".\docs\_build"``)
-8. Commit your changes (``git commit -am 'Add some fooBar``)
+6. Add and run tests (``uv run pytest``)
+7. Update and check documentation compiles (``uv run sphinx-build -M html ".\docs" ".\docs\_build"``)
+8. Commit your changes (``git commit -am 'Add some fooBar'``)
 9. Push to the branch (``git push origin feature/fooBar``)
 10. Create a new Pull Request
 
-.. _poetry: https://python-poetry.org/
-.. _anaconda: https://www.anaconda.com/distribution/#download-section
+.. _uv: https://docs.astral.sh/uv/
+
+
+Publishing
+----------
+
+To build and publish the package to PyPI:
+
+.. code:: bash
+
+    # Build the package
+    uv build
+
+    # Check the package (optional)
+    uv run --active twine check dist/*
+
+    # Publish to Test PyPI first (recommended)
+    uv publish --publish-url https://test.pypi.org/legacy/
+
+    # Publish to PyPI
+    uv publish
 
 
 Citation

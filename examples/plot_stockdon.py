@@ -47,7 +47,8 @@ print(df.head())
 sto06 = py_wave_runup.models.Stockdon2006(Hs=df.hs, Tp=df.tp, beta=df.beta)
 
 # Append a new column at the end of our dataset with Stockdon 2006 R2 estimations
-df["sto06_r2"] = sto06.R2
+df = df.copy()  # Ensure we work with a copy to avoid pandas warnings
+df.loc[:, "sto06_r2"] = sto06.R2
 
 # Check the first few rows of observed vs. modelled R2
 print(df[["r2", "sto06_r2"]].head())

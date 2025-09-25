@@ -106,3 +106,4 @@ ENV/
 # Editor configs
 /.idea/
 .vscode/settings.json
+.claude

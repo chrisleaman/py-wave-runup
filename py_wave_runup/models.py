@@ -9,7 +9,7 @@ from abc import ABCMeta, abstractmethod
 
 import joblib
 import numpy as np
-from pkg_resources import resource_filename
+from importlib import resources
 
 
 class RunupModel(metaclass=ABCMeta):
@@ -38,16 +38,12 @@ class RunupModel(metaclass=ABCMeta):
                 approximated by :math:`r=2.5D_{50}`.
         """
 
-        # Given parameters
         self.Hs = Hs
         self.Tp = Tp
         self.beta = beta
         self.Lp = Lp
         self.h = h
         self.r = r
-
-        # Calculated parameters
-        self.zeta = None
 
         # Ensure wave length or peak period is specified
         if all(v is None for v in [Lp, Tp]):
@@ -68,7 +64,7 @@ class RunupModel(metaclass=ABCMeta):
                     k.append(self._newtRaph(T, self.h))
                 self.Lp = (2 * np.pi) / np.array(k)
             else:
-                self.Lp = 9.81 * (self.Tp ** 2) / 2 / np.pi
+                self.Lp = 9.81 * (self.Tp**2) / 2 / np.pi
         else:
             self.Lp = np.atleast_1d(Lp)
             if self.h:
@@ -101,7 +97,7 @@ class RunupModel(metaclass=ABCMeta):
         # the Newton-Raphson method.
 
         if not np.isnan(T):
-            L_not = (9.81 * (T ** 2)) / (2 * np.pi)
+            L_not = (9.81 * (T**2)) / (2 * np.pi)
             k1 = (2 * np.pi) / L_not
 
             def fk(k):
@@ -170,7 +166,7 @@ class Stockdon2006(RunupModel):
         # Generalized runup (Eqn 19)
         result = 1.1 * (
             0.35 * self.beta * (self.Hs * self.Lp) ** 0.5
-            + ((self.Hs * self.Lp * (0.563 * self.beta ** 2 + 0.004)) ** 0.5) / 2
+            + ((self.Hs * self.Lp * (0.563 * self.beta**2 + 0.004)) ** 0.5) / 2
         )
 
         # For dissipative beaches (Eqn 18)
@@ -226,7 +222,7 @@ class Stockdon2006(RunupModel):
 
                 .. math:: S = \\sqrt{S_{inc}^{2}+S_{ig}^{2}}
         """
-        result = np.sqrt(self.sinc ** 2 + self.sig ** 2)
+        result = np.sqrt(self.sinc**2 + self.sig**2)
         result = self._return_one_or_array(result)
         return result
 
@@ -299,28 +295,28 @@ class Power2018(RunupModel):
         result = self.Hs * (
             (x2 + (((x3 * 3) / np.exp(-5)) * ((3 * x3) * x3)))
             + ((((x1 + x3) - 2) - (x3 - x2)) + ((x2 - x1) - x3))
-            + (((x3 ** x1) - (x3 ** (1 / 3))) - (np.exp(x2) ** (x1 * 3)))
+            + (((x3**x1) - (x3 ** (1 / 3))) - (np.exp(x2) ** (x1 * 3)))
             + np.sqrt((((x3 + x1) - x2) - (x2 + np.log10(x3))))
-            + ((((x2 ** 2) / (x1 ** (1 / 3))) ** (x1 ** (1 / 3))) - np.sqrt(x3))
+            + ((((x2**2) / (x1 ** (1 / 3))) ** (x1 ** (1 / 3))) - np.sqrt(x3))
             + (
                 (x2 + ((x3 / x1) ** (1 / 3)))
                 + (np.log(2) - (1 / (1 + np.exp(-(x2 + x3)))))
             )
-            + ((np.sqrt(x3) - (((3 ** 2) + 3) * (x2 ** 2))) ** 2)
-            + ((((x3 * -5) ** 2) ** 2) + (((x3 + x3) * x1) / (x2 ** 2)))
-            + np.log((np.sqrt(((x2 ** 2) + (x3 ** (1 / 3)))) + ((x2 + 3) ** (1 / 3))))
+            + ((np.sqrt(x3) - (((3**2) + 3) * (x2**2))) ** 2)
+            + ((((x3 * -5) ** 2) ** 2) + (((x3 + x3) * x1) / (x2**2)))
+            + np.log((np.sqrt(((x2**2) + (x3 ** (1 / 3)))) + ((x2 + 3) ** (1 / 3))))
             + (
-                (((x1 / x3) * (-(5 ** 2))) * (x3 ** 2))
+                (((x1 / x3) * (-(5**2))) * (x3**2))
                 - np.log10((1 / (1 + np.exp(-(x2 + x3)))))
             )
-            + (x1 ** x3)
+            + (x1**x3)
             + np.exp(-((((x3 / x1) ** np.exp(4)) + (np.exp(x3) ** 3)) ** 2))
             + np.exp((np.log((x2 - x3)) - np.log(np.exp(-((-1 + x1) ** 2)))))
             + ((np.sqrt(4) * (((x3 / x2) - x2) - (0 - x1))) ** 2)
             + (2 * ((((-5 * x3) + x1) * (2 - x3)) - 2))
             + ((np.sqrt(4) * (((x3 / x2) - x2) - (0 - x1))) ** 2)
-            + ((((-5 + x1) - x2) * (x2 - x3)) * ((x1 - x2) - (-(4 ** -5))))
-            + (np.exp(-((x2 + (-5 - x1)) ** 2)) + ((x2 + 5) * (x3 ** 2)))
+            + ((((-5 + x1) - x2) * (x2 - x3)) * ((x1 - x2) - (-(4**-5))))
+            + (np.exp(-((x2 + (-5 - x1)) ** 2)) + ((x2 + 5) * (x3**2)))
             + np.sqrt(
                 1
                 / (
@@ -328,7 +324,7 @@ class Power2018(RunupModel):
                     + np.exp(
                         -(
                             (np.exp(x1) - np.exp(-((x3 + x3) ** 2)))
-                            + ((x1 ** x3) - (x3 * 4))
+                            + ((x1**x3) - (x3 * 4))
                         )
                     )
                 )
@@ -619,15 +615,15 @@ class Beuzen2019(RunupModel):
         Returns:
             The 2% exceedence runup level from a pre-trained Gaussian process model
         """
-        model_path = resource_filename(
-            "py_wave_runup", "data/beuzen18/gp_runup_model.joblib"
-        )
-
         # Ignore the warning when unpickling GaussianProcessRegressor from version
         # 0.22.1.
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            with open(model_path, "rb") as f:
+            with (
+                resources.files("py_wave_runup")
+                .joinpath("datasets/beuzen18/gp_runup_model.joblib")
+                .open("rb") as f
+            ):
                 model = joblib.load(f)
 
         result = np.squeeze(
@@ -689,9 +685,9 @@ class Passarella2018(RunupModel):
 
         """
         result = (
-            (146.737 * (self.beta ** 2))
-            + ((self.Tp * (self.Hs ** 3)) / (5.800 + (10.595 * (self.Hs ** 3))))
-            - 4397.838 * (self.beta ** 4)
+            (146.737 * (self.beta**2))
+            + ((self.Tp * (self.Hs**3)) / (5.800 + (10.595 * (self.Hs**3))))
+            - 4397.838 * (self.beta**4)
         )
         result = self._return_one_or_array(result)
         return result

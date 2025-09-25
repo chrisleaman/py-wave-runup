@@ -5,9 +5,6 @@ Python Wave Runup
 .. image:: https://img.shields.io/pypi/v/py-wave-runup.svg
         :target: https://pypi.python.org/pypi/py-wave-runup
 
-.. image:: https://img.shields.io/travis/com/chrisleaman/py-wave-runup.svg
-        :target: https://travis-ci.com/chrisleaman/py-wave-runup
-
 .. image:: https://readthedocs.org/projects/py-wave-runup/badge/?version=latest
     :target: https://py-wave-runup.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status

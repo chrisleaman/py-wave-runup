@@ -1,8 +1,6 @@
 import math
 import random
-
 import numpy as np
-import pandas as pd
 
 
 class PerlinNoise(object):
@@ -84,13 +82,11 @@ def calculate_Lo(df):
     Input:
     df: pandas dataframe with at least the following columns:
         - df.Tp: Wave period in seconds
-
     Output:
         - A pandas series containing the deep water wavelength Lo in meters
-
     Example of use:
     df['Lo'] = utils.calculate_Lo(df)
-    See examples/plot_reverse_shoaling.py
+    See examples/reverse_shoaling.py
     """
     g = 9.81  # in m/s2
     Lo = (g * df.Tp * df.Tp) / (2.0 * np.pi)
@@ -102,7 +98,6 @@ def reverse_shoal_intermediate(
 ):
     """
     Computes deep water wave height assuming an intermediate wave depth condition.
-
     Input: pandas dataframe with at least the following columns:
         - waterDepthSeries: Pandas series containing water depth where wave height was
           measured/computed (meters)
@@ -110,10 +105,8 @@ def reverse_shoal_intermediate(
         - TpSeries: Pandas series containing wave period (s)
         - HsSeries: Pandas series containing height at the time of measurement/computation
           in intermediate water (m)
-
     Output:
         - Pandas series of reverse-shoaled deep water significant wave heights (m)
-
     Example of use:
     HoSeries = reverse_shoal_intermediate(waterDepthSeries=df.water_depth,
                                           LoSeries=df.Lo,
@@ -143,15 +136,15 @@ def reverse_shoal_intermediate(
 
     # Main calculation
     g = 9.81  # in m/s2
-    y = 4.03 * waterDepthSeries / (TpSeries ** 2)
-    kd2 = y ** 2 + y / (
+    y = 4.03 * waterDepthSeries / (TpSeries**2)
+    kd2 = y**2 + y / (
         1
         + (0.666 * y)
-        + (0.355 * y ** 2)
-        + (0.161 * y ** 3)
-        + (0.0632 * y ** 4)
-        + (0.0218 * y ** 5)
-        + (0.00564 * y ** 6)
+        + (0.355 * y**2)
+        + (0.161 * y**3)
+        + (0.0632 * y**4)
+        + (0.0218 * y**5)
+        + (0.00564 * y**6)
     )
     kh = np.sqrt(kd2)
     Cg = (
@@ -170,20 +163,16 @@ def reverse_shoal_intermediate(
 def determine_waveDepth(df):
     """
     Determines whether a wave is in deep, intermediate, or shallow water
-
     Input:
     df: pandas dataframe containing at least the following columns:
         - df.water_depth: water depth where significant wave height was measured
           or computed (in meters, depth is positive)
         - df.Lo: deep water wave length in meters
-
     Output:
         - A pandas series containing the wave depth classification
-
     Example of use:
     df['wave_depth'] = utils.determine_waveDepth(df)
-    See examples/plot_reverse_shoaling.py
-
+    See examples/reverse_shoaling.py
     """
     # create a list of conditions
     conditions = [
@@ -200,7 +189,10 @@ def determine_waveDepth(df):
     values = ["shallow", "intermediate", "deep"]
 
     # create a new column and use np.select to assign values to it using our lists as arguments
-    df["wave_depth"] = np.select(conditions, values)
+    df = (
+        df.copy()
+    )  # Ensure we're working with a copy to avoid chained assignment warnings
+    df.loc[:, "wave_depth"] = np.select(conditions, values, default="unknown")
 
     return df.wave_depth
 
@@ -209,23 +201,17 @@ def reverse_shoal(df_wave=None):
     """
     Calculates the deep water wave height given an inshore wave height at a
     particular depth
-
     For theory, additional code, and useful tools, refer to:
          https://github.com/csherwood-usgs/jsed/blob/master/Runup%20and%20Reverse%20Shoaling%2C%20USGS.html
     And: https://csherwood-usgs.github.io/jsed/Runup%20and%20Reverse%20Shoaling,%20USGS.html
-
     Args:
         df_wave: Input dataframe with column for water_depth, Tp, Hs, and wave_depth
             - "wave_depth" column: Indicates whether wave is in deep, intermediate, or shallow water.
               To generate a "wave_depth" column, see the function determine_waveDepth in utils.py
-
     Returns:
         Pandas series of reverse shoalled wave heights
-
     Note: only deals with intermediate and deep water wave conditions. Will return NaN if the wave meets a shallow water condition.
-
     Uses an approximation to solve dispersion eq.
-
     """
 
     df = df_wave.copy()
@@ -243,15 +229,18 @@ def reverse_shoal(df_wave=None):
     # To avoid copy warning in pandas
     mask_int = df.wave_depth == "intermediate"
     df_int = df[mask_int]
-    HoSeries = reverse_shoal_intermediate(
-        waterDepthSeries=df_int.water_depth,
-        LoSeries=df_int.Lo,
-        TpSeries=df_int.Tp,
-        HsSeries=df_int.Hs,
-    )
 
-    # Assign values in series to original dataframe
-    df.loc[df["wave_depth"] == "intermediate", "Ho"] = HoSeries
+    # Only process if there are intermediate water conditions
+    if len(df_int) > 0:
+        HoSeries = reverse_shoal_intermediate(
+            waterDepthSeries=df_int.water_depth,
+            LoSeries=df_int.Lo,
+            TpSeries=df_int.Tp,
+            HsSeries=df_int.Hs,
+        )
+
+        # Assign values in series to original dataframe
+        df.loc[df["wave_depth"] == "intermediate", "Ho"] = HoSeries
 
     # Return series of values that matches the number
     # of rows in the original dataframe

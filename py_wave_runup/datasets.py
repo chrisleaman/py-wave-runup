@@ -46,7 +46,7 @@ def load_power18():
 
     # To load a resource in a package, need to use pkgutil.
     # Refer https://stackoverflow.com/a/6028106
-    data = pkgutil.get_data(__name__, "data/power18.csv")
+    data = pkgutil.get_data(__name__, "datasets/power18.csv")
 
     # Manually define names for each column
     names = [
@@ -79,7 +79,6 @@ def load_random_sto06(
     beta_range=(0.08, 0.1),
     noise_std=0.3,
 ):
-
     """
     Loads a randomly generated wave runup dataframe.
 
