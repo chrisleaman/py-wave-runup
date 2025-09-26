@@ -29,7 +29,7 @@ much research conducted to try improve our understanding of wave runup processes
 Although there are many processes which can influence wave runup (such as nonlinear
 wave transformation, wave reflection, three-dimensional effects, porosity, roughness,
 permeability and groundwater) [#cem06]_, many attempts have been made to derive
-empirical relatinoships based on easily measurable parameters. Typically, empirical
+empirical relationships based on easily measurable parameters. Typically, empirical
 wave runup models include:
 
     - **Hs**: significant wave height
